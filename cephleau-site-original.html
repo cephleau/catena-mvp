@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cephleau | Turning Complexity into Clarity</title>
+  <meta
+    name="description"
+    content="Cephleau helps organizations improve processes, strengthen data quality, and build smarter systems for sustainable growth."
+  />
+  <style>
+    :root {
+      --bg: #f7f9fb;
+      --surface: #ffffff;
+      --text: #10222b;
+      --muted: #5f7280;
+      --primary: #0f5c6e;
+      --primary-dark: #0b4755;
+      --accent: #c8a96b;
+      --border: #d9e2e8;
+      --shadow: 0 10px 30px rgba(16, 34, 43, 0.08);
+      --radius: 18px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 92, 110, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(247, 249, 251, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(217, 226, 232, 0.7);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 86px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 0.98;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .diagram {
+      display: grid;
+      gap: 16px;
+    }
+
+    .diagram-box {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff, #f4f8fa);
+    }
+
+    .diagram-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      color: var(--primary);
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .diagram-box h4 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .diagram-box p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: #eef4f7;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    .stat span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Cards */
+    .grid-3,
+    .grid-4,
+    .services-grid,
+    .case-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .services-grid,
+    .case-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(15, 92, 110, 0.12);
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    /* Split section */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      color: var(--muted);
+    }
+
+    .check-list li::before {
+      content: "\u2713";
+      color: var(--accent);
+      font-weight: 800;
+      margin-top: 1px;
+    }
+
+    /* Process */
+    .process {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .process-step {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .process-step h4 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .process-step p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Founder */
+    .founder {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 34px;
+      align-items: center;
+      margin-top: 46px;
+    }
+
+    .founder-photo {
+      min-height: 360px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(200, 169, 107, 0.25), transparent 35%),
+        linear-gradient(135deg, var(--primary), #143d49);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: end;
+      justify-content: start;
+      padding: 26px;
+      color: white;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .founder-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .founder-card p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* CTA */
+    .cta-box {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      border-radius: 30px;
+      padding: 42px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-box p {
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 650px;
+      margin-top: 10px;
+    }
+
+    .cta-box .btn-secondary {
+      border-color: white;
+      color: white;
+    }
+
+    .cta-box .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .cta-box .btn-primary {
+      background: white;
+      color: var(--primary-dark);
+    }
+
+    .cta-box .btn-primary:hover {
+      background: #f2f5f7;
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0 48px;
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero-grid,
+      .split,
+      .founder,
+      .services-grid,
+      .case-grid,
+      .grid-3,
+      .grid-4,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 4%;
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 70px 0;
+      }
+
+      .hero {
+        padding: 68px 0 58px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        padding: 30px 22px;
+      }
+
+      .panel,
+      .card,
+      .hero-card,
+      .founder-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand">
+        <div class="brand-mark">C</div>
+        <span>Cephleau</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        \u2630
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-primary nav-cta">Book a Consultation</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Operational Excellence \u2022 Data Clarity \u2022 Smarter Systems</span>
+          <h1>Turning complexity into clarity.</h1>
+          <p>
+            Cephleau helps organizations improve processes, strengthen data quality,
+            and build smarter systems for sustainable growth. We turn operational
+            friction into structured action.
+          </p>
+
+          <div class="btn-group">
+            <a href="#contact" class="btn btn-primary">Work With Cephleau</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="diagram">
+            <div class="diagram-box">
+              <div class="diagram-label">Discover</div>
+              <h4>Understand the current state</h4>
+              <p>Map workflows, pain points, constraints, and decision bottlenecks.</p>
+            </div>
+
+            <div class="diagram-box">
+              <div class="diagram-label">Diagnose</div>
+              <h4>Identify root causes</h4>
+              <p>Separate symptoms from structural issues using a systems mindset.</p>
+            </div>
+
+            <div class="diagram-box">
+              <div class="diagram-label">Design</div>
+              <h4>Create practical solutions</h4>
+              <p>Build a roadmap for process, governance, reporting, and execution.</p>
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Lean</strong>
+              <span>Process thinking</span>
+            </div>
+            <div class="stat">
+              <strong>Data</strong>
+              <span>Governance clarity</span>
+            </div>
+            <div class="stat">
+              <strong>Action</strong>
+              <span>Execution focused</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Cephleau Does -->
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">What Cephleau Does</span>
+        <h2 class="section-title">Structured support for complex operations.</h2>
+        <p class="section-subtitle">
+          Cephleau blends process improvement, data discipline, and operational strategy
+          to help teams work with more clarity, consistency, and control.
+        </p>
+
+        <div class="grid-4">
+          <article class="card">
+            <div class="card-icon">01</div>
+            <h3>Process Improvement</h3>
+            <p>
+              Analyze workflows, reduce waste, remove bottlenecks, and build more
+              reliable systems.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">02</div>
+            <h3>Data Governance</h3>
+            <p>
+              Improve data quality, standardization, decision logic, and accountability
+              across operations.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">03</div>
+            <h3>Automation Strategy</h3>
+            <p>
+              Identify repeatable work, streamline handoffs, and design smarter execution
+              pathways.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">04</div>
+            <h3>Operational Excellence</h3>
+            <p>
+              Build sustainable improvement systems that support growth without chaos.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who It Helps -->
+    <section class="section" style="background:#edf3f6;">
+      <div class="container">
+        <span class="eyebrow">Who It Helps</span>
+        <h2 class="section-title">Built for leaders navigating complexity.</h2>
+        <p class="section-subtitle">
+          Cephleau works best where structure matters, systems are strained,
+          and better decision making depends on cleaner process and data.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-icon">A</div>
+            <h3>Small Businesses</h3>
+            <p>
+              Create scalable systems early so growth does not create operational drag.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">B</div>
+            <h3>Operations Teams</h3>
+            <p>
+              Improve workflow visibility, process consistency, and accountability.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">C</div>
+            <h3>Decision Makers</h3>
+            <p>
+              Strengthen trust in reporting, governance, and the systems driving action.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Cephleau -->
+    <section class="section" id="about">
+      <div class="container">
+        <span class="eyebrow">Why Cephleau</span>
+        <h2 class="section-title">Not generic consulting. Practical systems thinking.</h2>
+
+        <div class="split">
+          <div class="panel">
+            <h3 style="margin-bottom:14px;">Why the brand exists</h3>
+            <p style="color:var(--muted);">
+              Cephleau was built around the idea that complexity should not create confusion.
+              Strong organizations need clear workflows, dependable data, and systems that
+              support better decisions. The mission is to bring structure where there is noise.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3 style="margin-bottom:14px;">What makes it different</h3>
+            <ul class="check-list">
+              <li>Industrial engineering mindset grounded in real operations</li>
+              <li>Lean and continuous improvement approach focused on execution</li>
+              <li>Strong emphasis on data clarity, governance, and decision quality</li>
+              <li>Solutions designed to be useful in practice, not just impressive on slides</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services" style="background:#edf3f6;">
+      <div class="container">
+        <span class="eyebrow">Signature Services</span>
+        <h2 class="section-title">Focused offers that solve real operational pain.</h2>
+        <p class="section-subtitle">
+          Start with a defined engagement, clear deliverables, and a practical path forward.
+        </p>
+
+        <div class="services-grid">
+          <article class="card">
+            <div class="card-icon">1</div>
+            <h3>Process Clarity Audit</h3>
+            <p>
+              Review current workflows, identify bottlenecks, expose inefficiencies,
+              and highlight immediate improvement opportunities.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">2</div>
+            <h3>Data & Decision Support</h3>
+            <p>
+              Improve reporting logic, strengthen governance structure, and make data
+              more reliable for operational decisions.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">3</div>
+            <h3>Operational Improvement Roadmap</h3>
+            <p>
+              Build a prioritized action plan with owners, milestones, and measurable
+              outcomes that support implementation.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="section-title">A repeatable method for turning friction into progress.</h2>
+        <p class="section-subtitle">
+          Every engagement is designed to move from ambiguity to structure, then from structure to action.
+        </p>
+
+        <div class="process">
+          <article class="process-step">
+            <div class="step-number">1</div>
+            <h4>Discover</h4>
+            <p>
+              Understand the current state, business context, constraints, and most important pain points.
+            </p>
+          </article>
+
+          <article class="process-step">
+            <div class="step-number">2</div>
+            <h4>Diagnose</h4>
+            <p>
+              Identify root causes, breakdowns, handoff issues, and gaps in process or governance.
+            </p>
+          </article>
+
+          <article class="process-step">
+            <div class="step-number">3</div>
+            <h4>Design</h4>
+            <p>
+              Develop practical solutions, operating models, and decision frameworks tailored to the need.
+            </p>
+          </article>
+
+          <article class="process-step">
+            <div class="step-number">4</div>
+            <h4>Deliver</h4>
+            <p>
+              Support execution with clear next steps, implementation logic, and measurable direction.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="section" id="case-studies" style="background:#edf3f6;">
+      <div class="container">
+        <span class="eyebrow">Results & Use Cases</span>
+        <h2 class="section-title">Outcome oriented work, even when the problem is messy.</h2>
+        <p class="section-subtitle">
+          Replace these examples with real client stories, anonymized engagements, or future project snapshots.
+        </p>
+
+        <div class="case-grid">
+          <article class="card">
+            <h3>Workflow Bottleneck Reduction</h3>
+            <p>
+              Mapped a fragmented process, identified handoff delays, and designed a more reliable operating flow.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Reporting & Governance Alignment</h3>
+            <p>
+              Clarified decision ownership, standardized information inputs, and improved trust in reporting outputs.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Scalable Operations Roadmap</h3>
+            <p>
+              Built a phased improvement plan to support growth without adding operational confusion.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="section" id="resources">
+      <div class="container">
+        <span class="eyebrow">Resources</span>
+        <h2 class="section-title">Content that builds clarity and trust.</h2>
+        <p class="section-subtitle">
+          This section can later hold blog posts, guides, checklists, downloadable templates,
+          and thought leadership on process improvement and data strategy.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-icon">R1</div>
+            <h3>Process Improvement Checklist</h3>
+            <p>Simple framework for identifying friction, waste, and weak handoffs.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">R2</div>
+            <h3>Data Governance Starter Guide</h3>
+            <p>Core principles for improving trust, ownership, and decision quality.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">R3</div>
+            <h3>Operational Maturity Snapshot</h3>
+            <p>Quick self assessment to evaluate structure, consistency, and scalability.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder -->
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Founder</span>
+        <h2 class="section-title">Strategy with an execution mindset.</h2>
+
+        <div class="founder">
+          <div class="founder-photo">
+            Carlos<br />Cadena
+          </div>
+
+          <div class="founder-card">
+            <h3 style="margin-bottom:14px;">About the founder</h3>
+            <p>
+              Carlos Cadena brings an industrial engineering perspective to process design,
+              operational improvement, and structured problem solving.
+            </p>
+            <p>
+              Cephleau is built on the belief that organizations perform better when their
+              systems are clear, their data is dependable, and their operations are designed
+              with intention.
+            </p>
+            <p>
+              The focus is practical execution, measurable improvement, and helping clients
+              move from complexity to control.
+            </p>
+
+            <div class="btn-group">
+              <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+              <a href="#" class="btn btn-secondary">View LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <span class="eyebrow" style="color:#d9ecf2;">Ready to Begin?</span>
+            <h2 style="font-size:clamp(2rem, 4vw, 3rem); line-height:1.1;">
+              Make your systems simpler, stronger, and more scalable.
+            </h2>
+            <p>
+              Whether you need process clarity, cleaner decision support, or a roadmap for improvement,
+              Cephleau can help turn complexity into actionable structure.
+            </p>
+          </div>
+
+          <div class="btn-group">
+            <a href="mailto:hello@cephleau.com" class="btn btn-primary">Email Cephleau</a>
+            <a href="#home" class="btn btn-secondary">Back to Top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <strong style="color:var(--text);">Cephleau</strong><br />
+        Turning complexity into clarity.
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+  </script>
+</body>
+</html>
