@@ -1,25 +1,21 @@
 #!/usr/bin/env python3
 """
 Octo — Desktop Companion (Clippy-style)
-- Animated avatar, always on top
-- Speech bubbles with tips/quips
-- Click to open chat
+- Centered on screen
+- Multiple animations: idle pulse, bob, blink, excited bounce
+- Speech bubbles with tips
+- Click to cycle animations / show bubble
 - Drag to reposition
-- Double-click to dismiss bubble
+- Double-click to quit
 """
 
 import tkinter as tk
 from tkinter import font as tkfont
-from PIL import Image, ImageTk
-import os
-import random
-import subprocess
-import threading
-import time
+from PIL import Image, ImageTk, ImageEnhance, ImageFilter
+import os, random, math
 
-GIF_PATH  = os.path.join(os.path.dirname(__file__), "avatars/octo-animated.gif")
-AVATAR_SIZE = 180
-BUBBLE_W    = 280
+GIF_PATH    = os.path.join(os.path.dirname(__file__), "avatars/octo-animated.gif")
+AVATAR_SIZE = 220
 NAVY        = "#08234B"
 ORANGE      = "#FF6B00"
 WHITE       = "#FFFFFF"
@@ -27,69 +23,52 @@ BUBBLE_BG   = "#EFF6FF"
 BUBBLE_FG   = "#0F1F3D"
 
 QUIPS = [
-    "👋 Hey Carlos. Ready to move some tasks to Done?",
-    "🐙 Eight arms, all yours.",
+    "👋 Hey Carlos. Ready to move tasks to Done?",
+    "🐙 Eight arms. All yours.",
     "💡 Have you posted on LinkedIn today?",
-    "📋 Kanban's looking light on In Progress. Let's fix that.",
+    "📋 Kanban's light on In Progress. Let's fix that.",
     "⚡ LLCs don't file themselves. Just saying.",
     "🎯 30-day sprint. Clock's ticking.",
-    "🔍 Want me to research something?",
-    "📞 Discovery calls don't book themselves either.",
     "💰 First revenue by April 21. We got this.",
-    "🏛️ BidNet registration for Catena — want to knock that out?",
-    "📣 LinkedIn Post 1 is ready to copy-paste. Go get some impressions.",
-    "🤝 LanguageLine subcontract app takes ~20 min. Worth it.",
+    "🏛️ BidNet registration for Catena — want to knock it out?",
+    "📣 LinkedIn Post 1 is ready to go. Copy. Paste. Post.",
+    "🤝 LanguageLine subcontract app = ~20 min. Worth it.",
+    "🔍 Want me to research something?",
+    "📞 Discovery calls don't book themselves.",
+    "🐙 It looks like you're launching a business. Want help?",
 ]
 
 class SpeechBubble(tk.Toplevel):
-    def __init__(self, parent, text, x, y, on_close):
+    def __init__(self, parent, text, ax, ay, on_close):
         super().__init__(parent)
         self.on_close = on_close
         self.overrideredirect(True)
         self.attributes("-topmost", True)
-        self.configure(bg=BUBBLE_BG)
+        self.configure(bg="#c5d5e8")
 
-        # Drop shadow feel via padding
-        outer = tk.Frame(self, bg="#c5d5e8", padx=1, pady=1)
-        outer.pack(fill="both", expand=True)
+        inner = tk.Frame(self, bg=BUBBLE_BG, padx=14, pady=10)
+        inner.pack(padx=1, pady=1, fill="both", expand=True)
 
-        inner = tk.Frame(outer, bg=BUBBLE_BG, padx=12, pady=10)
-        inner.pack(fill="both", expand=True)
+        f = tkfont.Font(family="Helvetica Neue", size=12)
+        tk.Label(inner, text=text, wraplength=260, bg=BUBBLE_BG, fg=BUBBLE_FG,
+                 font=f, justify="left", anchor="w").pack(anchor="w")
 
-        msg_font = tkfont.Font(family="Helvetica Neue", size=12)
-        lbl = tk.Label(inner, text=text, wraplength=BUBBLE_W - 40,
-                       bg=BUBBLE_BG, fg=BUBBLE_FG, font=msg_font,
-                       justify="left", anchor="w")
-        lbl.pack(anchor="w")
+        btns = tk.Frame(inner, bg=BUBBLE_BG)
+        btns.pack(fill="x", pady=(8,0))
 
-        btn_frame = tk.Frame(inner, bg=BUBBLE_BG)
-        btn_frame.pack(fill="x", pady=(8, 0))
-
-        chat_btn = tk.Button(btn_frame, text="Open Chat →",
-                             bg=ORANGE, fg=WHITE, relief="flat",
-                             font=tkfont.Font(family="Helvetica Neue", size=11, weight="bold"),
-                             padx=10, pady=4, cursor="hand2",
-                             command=self.open_chat)
-        chat_btn.pack(side="left")
-
-        close_btn = tk.Button(btn_frame, text="✕",
-                              bg=BUBBLE_BG, fg="#94a3b8", relief="flat",
-                              font=tkfont.Font(size=12), cursor="hand2",
-                              command=self.dismiss)
-        close_btn.pack(side="right")
+        tk.Button(btns, text="✕ Dismiss", bg=BUBBLE_BG, fg="#94a3b8",
+                  relief="flat", font=tkfont.Font(size=11),
+                  cursor="hand2", command=self.dismiss).pack(side="right")
 
         self.update_idletasks()
         bw = self.winfo_reqwidth()
         bh = self.winfo_reqheight()
-
-        # Position above-left of avatar
-        bx = max(0, x - bw - 10)
-        by = max(0, y - bh - 10)
+        bx = ax + AVATAR_SIZE // 2 - bw // 2
+        by = ay - bh - 12
+        # keep on screen
+        bx = max(10, bx)
+        by = max(10, by)
         self.geometry(f"+{bx}+{by}")
-
-    def open_chat(self):
-        self.dismiss()
-        subprocess.Popen(["open", "https://localhost:3000"])  # adjust to your webchat URL
 
     def dismiss(self):
         self.on_close()
@@ -102,108 +81,172 @@ class OctoAvatar:
         self.root.title("Octo")
         self.root.overrideredirect(True)
         self.root.attributes("-topmost", True)
-        self.root.attributes("-alpha", 0.95)
+        self.root.attributes("-alpha", 0.96)
         self.root.configure(bg=NAVY)
 
-        # Start bottom-right
+        # Center on screen
         sw = root.winfo_screenwidth()
         sh = root.winfo_screenheight()
-        self.x = sw - AVATAR_SIZE - 24
-        self.y = sh - AVATAR_SIZE - 60
-        self.root.geometry(f"{AVATAR_SIZE}x{AVATAR_SIZE}+{self.x}+{self.y}")
+        self.base_x = (sw - AVATAR_SIZE) // 2
+        self.base_y = (sh - AVATAR_SIZE) // 2
+        self.root.geometry(f"{AVATAR_SIZE}x{AVATAR_SIZE}+{self.base_x}+{self.base_y}")
 
         # Load GIF frames
-        self.frames = []
-        self.durations = []
+        self.gif_frames = []
+        self.gif_durations = []
         gif = Image.open(GIF_PATH)
         try:
             while True:
-                frame = gif.copy().convert("RGBA").resize(
-                    (AVATAR_SIZE, AVATAR_SIZE), Image.LANCZOS)
-                self.frames.append(ImageTk.PhotoImage(frame))
-                self.durations.append(gif.info.get("duration", 60))
+                f = gif.copy().convert("RGBA").resize((AVATAR_SIZE, AVATAR_SIZE), Image.LANCZOS)
+                self.gif_frames.append(f)
+                self.gif_durations.append(gif.info.get("duration", 60))
                 gif.seek(gif.tell() + 1)
         except EOFError:
             pass
 
+        self.tk_frames = [ImageTk.PhotoImage(f) for f in self.gif_frames]
+
         self.label = tk.Label(root, bg=NAVY, bd=0, highlightthickness=0, cursor="hand2")
         self.label.pack(fill="both", expand=True)
 
-        self.current_frame = 0
-        self.animate()
+        # Animation state
+        self.gif_idx    = 0
+        self.anim_mode  = "idle"   # idle | bob | bounce | wave
+        self.bob_tick   = 0
+        self.bounce_tick = 0
+        self.wave_tick  = 0
+        self.anim_offset_y = 0
 
-        # State
+        self.bubble      = None
+        self.bubble_open = False
+
+        # Drag
         self._drag_x = 0
         self._drag_y = 0
         self._dragging = False
-        self.bubble = None
-        self.bubble_open = False
 
         # Bindings
-        self.label.bind("<ButtonPress-1>", self.start_drag)
-        self.label.bind("<B1-Motion>", self.on_drag)
+        self.label.bind("<ButtonPress-1>",   self.start_drag)
+        self.label.bind("<B1-Motion>",       self.on_drag)
         self.label.bind("<ButtonRelease-1>", self.end_drag)
         self.label.bind("<Double-Button-1>", lambda e: self.root.destroy())
 
-        # Right-click
         self.menu = tk.Menu(root, tearoff=0, bg=NAVY, fg=WHITE,
                             activebackground=ORANGE, activeforeground=WHITE)
+        self.menu.add_command(label="Bob",    command=lambda: self.set_mode("bob"))
+        self.menu.add_command(label="Bounce", command=lambda: self.set_mode("bounce"))
+        self.menu.add_command(label="Wave",   command=lambda: self.set_mode("wave"))
+        self.menu.add_command(label="Idle",   command=lambda: self.set_mode("idle"))
+        self.menu.add_separator()
         self.menu.add_command(label="Show tip", command=self.show_bubble)
         self.menu.add_separator()
-        self.menu.add_command(label="Quit Octo", command=root.destroy)
+        self.menu.add_command(label="Quit", command=root.destroy)
         self.label.bind("<Button-2>", self.show_menu)
         self.label.bind("<Button-3>", self.show_menu)
 
-        # Auto-quip every 5 minutes
-        self.schedule_quip()
+        # Start
+        self.tick()
+        self.root.after(2000, self.show_bubble)
+        self.root.after(300000, self.auto_quip)
 
-        # First quip after 3 seconds
-        self.root.after(3000, self.show_bubble)
+        # Cycle animations automatically
+        self.root.after(8000, self.auto_mode)
 
-    def animate(self):
-        self.label.configure(image=self.frames[self.current_frame])
-        dur = self.durations[self.current_frame]
-        self.current_frame = (self.current_frame + 1) % len(self.frames)
-        self.root.after(dur, self.animate)
+    # ── Animation loop ────────────────────────────────────────────────────────
+
+    def tick(self):
+        # Advance GIF frame
+        img = self.gif_frames[self.gif_idx].copy()
+        dur = self.gif_durations[self.gif_idx]
+        self.gif_idx = (self.gif_idx + 1) % len(self.gif_frames)
+
+        # Compute positional offset for current mode
+        off_y = 0
+        off_x = 0
+
+        if self.anim_mode == "bob":
+            self.bob_tick += 1
+            off_y = int(math.sin(self.bob_tick * 0.18) * 9)
+
+        elif self.anim_mode == "bounce":
+            self.bounce_tick += 1
+            t = self.bounce_tick * 0.3
+            # Bouncy abs-sine
+            off_y = -int(abs(math.sin(t)) * 22)
+            if self.bounce_tick > 60:
+                self.anim_mode = "bob"
+
+        elif self.anim_mode == "wave":
+            self.wave_tick += 1
+            off_x = int(math.sin(self.wave_tick * 0.25) * 12)
+            off_y = int(math.cos(self.wave_tick * 0.12) * 6)
+            if self.wave_tick > 80:
+                self.anim_mode = "idle"
+
+        # Apply brightness pulse (already baked into gif) + optional scale bounce
+        tk_img = ImageTk.PhotoImage(img)
+        self.tk_frames[self.gif_idx] = tk_img  # keep ref
+        self.label.configure(image=tk_img)
+
+        # Move window for positional animations
+        nx = self.base_x + off_x
+        ny = self.base_y + off_y
+        self.root.geometry(f"{AVATAR_SIZE}x{AVATAR_SIZE}+{nx}+{ny}")
+
+        self.root.after(dur, self.tick)
+
+    def set_mode(self, mode):
+        self.anim_mode   = mode
+        self.bob_tick    = 0
+        self.bounce_tick = 0
+        self.wave_tick   = 0
+
+    def auto_mode(self):
+        """Randomly pick a fun animation every 8s"""
+        if self.anim_mode == "idle":
+            choice = random.choice(["bob", "wave", "idle", "idle"])
+            self.set_mode(choice)
+        self.root.after(8000, self.auto_mode)
+
+    # ── Speech bubble ─────────────────────────────────────────────────────────
+
+    def show_bubble(self):
+        if self.bubble_open:
+            return
+        self.set_mode("bounce")  # excited!
+        text = random.choice(QUIPS)
+        ax = self.root.winfo_x()
+        ay = self.root.winfo_y()
+        self.bubble_open = True
+        self.bubble = SpeechBubble(
+            self.root, text, ax, ay,
+            on_close=lambda: setattr(self, "bubble_open", False)
+        )
+
+    def auto_quip(self):
+        self.show_bubble()
+        self.root.after(300000, self.auto_quip)
+
+    # ── Drag ──────────────────────────────────────────────────────────────────
 
     def start_drag(self, event):
-        self._drag_x = event.x
-        self._drag_y = event.y
+        self._drag_x  = event.x
+        self._drag_y  = event.y
         self._dragging = False
 
     def on_drag(self, event):
         self._dragging = True
         if self.bubble:
-            try:
-                self.bubble.destroy()
-            except:
-                pass
+            try: self.bubble.destroy()
+            except: pass
             self.bubble_open = False
-        self.x = self.root.winfo_x() + event.x - self._drag_x
-        self.y = self.root.winfo_y() + event.y - self._drag_y
-        self.root.geometry(f"+{self.x}+{self.y}")
+        self.base_x = self.root.winfo_x() + event.x - self._drag_x
+        self.base_y = self.root.winfo_y() + event.y - self._drag_y
+        self.root.geometry(f"+{self.base_x}+{self.base_y}")
 
     def end_drag(self, event):
         if not self._dragging:
             self.show_bubble()
-
-    def show_bubble(self):
-        if self.bubble_open:
-            return
-        text = random.choice(QUIPS)
-        ax = self.root.winfo_x()
-        ay = self.root.winfo_y()
-        self.bubble_open = True
-        self.bubble = SpeechBubble(self.root, text, ax, ay,
-                                   on_close=lambda: setattr(self, 'bubble_open', False))
-
-    def schedule_quip(self):
-        # Show a tip every 5 minutes (300000 ms)
-        self.root.after(300000, self._auto_quip)
-
-    def _auto_quip(self):
-        self.show_bubble()
-        self.schedule_quip()
 
     def show_menu(self, event):
         self.menu.tk_popup(event.x_root, event.y_root)
@@ -211,5 +254,5 @@ class OctoAvatar:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = OctoAvatar(root)
+    OctoAvatar(root)
     root.mainloop()
