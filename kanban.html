@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐻 Oso Kanban — Business Launch Tracker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f1117;
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 1.5rem; font-weight: 700; }
+  .subtitle { color: #64748b; font-size: 0.85rem; }
+  .goal-bar {
+    background: #1e2433;
+    border: 1px solid #2d3748;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 24px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+  .goal-bar strong { color: #f59e0b; }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+  .column {
+    background: #1a1f2e;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #2d3748;
+  }
+  .col-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2d3748;
+  }
+  .col-header h2 { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #22c55e; }
+  .count {
+    margin-left: auto;
+    background: #2d3748;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #475569;
+    font-weight: 600;
+    margin: 12px 0 6px;
+  }
+  .card {
+    background: #212840;
+    border: 1px solid #2d3748;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: #cbd5e1;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: #4a5568; }
+  .card.done {
+    background: #161d2a;
+    color: #475569;
+    text-decoration: line-through;
+  }
+  .card.done .tag { text-decoration: none; }
+  .card-icon { flex-shrink: 0; font-size: 0.85rem; margin-top: 1px; }
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: auto;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+  .tag-legal { background: #312e81; color: #a5b4fc; }
+  .tag-cephleau { background: #1e3a5f; color: #93c5fd; }
+  .tag-catena { background: #3b1f5e; color: #d8b4fe; }
+  .resources {
+    margin-top: 24px;
+    background: #1a1f2e;
+    border: 1px solid #2d3748;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .resources h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .resource-item {
+    background: #212840;
+    border: 1px solid #2d3748;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  .resource-item .res-label { color: #64748b; font-size: 0.72rem; margin-bottom: 2px; }
+  .resource-item a { color: #60a5fa; text-decoration: none; }
+  .resource-item a:hover { text-decoration: underline; }
+  .resource-item .res-file { color: #a78bfa; font-family: monospace; font-size: 0.75rem; }
+  .updated { color: #334155; font-size: 0.75rem; margin-top: 20px; text-align: right; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🐻 Oso Kanban</h1>
+  <span class="subtitle">Business Launch Tracker — Updated 2026-03-21</span>
+</header>
+
+<div class="goal-bar">
+  🎯 <strong>Sprint Goal:</strong> First revenue by April 21, 2026 &nbsp;·&nbsp;
+  Cephleau: 1 Clarity engagement ($2K+) &nbsp;·&nbsp;
+  Catena: First subcontract assignment
+</div>
+
+<div class="board">
+
+  <!-- BACKLOG -->
+  <div class="column">
+    <div class="col-header">
+      <div class="dot dot-red"></div>
+      <h2>Backlog</h2>
+      <span class="count">30</span>
+    </div>
+
+    <div class="section-label">⚖️ Legal & Structure</div>
+    <div class="card"><span class="card-icon">📄</span>File Articles of Organization — Cephleau ($50)<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">📄</span>File Articles of Organization — Catena ($50)<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">🔢</span>Apply for EIN — Cephleau<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">🔢</span>Apply for EIN — Catena<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">🏦</span>Open business bank account — Cephleau<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">🏦</span>Open business bank account — Catena<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">🪪</span>Denver Business License — Cephleau (~$50)<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">🪪</span>Denver Business License — Catena (~$50)<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">📝</span>Draft Operating Agreement — Cephleau<span class="tag tag-legal">Legal</span></div>
+    <div class="card"><span class="card-icon">📝</span>Draft Operating Agreement — Catena<span class="tag tag-legal">Legal</span></div>
+
+    <div class="section-label">💼 Cephleau Consulting</div>
+    <div class="card"><span class="card-icon">🌐</span>Add PMP/LSSBB/CDMP certs to website bio<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">🔍</span>Add process improvement + data governance keywords<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">📅</span>Verify Calendly booking link is live<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">✍️</span>Strengthen website headline (engineer angle)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">👥</span>Build prospect list (20 warm contacts)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">💬</span>Send 20 LinkedIn outreach messages<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">📣</span>Post LinkedIn — Post 1 (tribal knowledge)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">📣</span>Post LinkedIn — Post 2 (data governance)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">📣</span>Post LinkedIn — Post 3 (Lean + modern ops)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">🗂️</span>List on Catalant or similar platform<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">📞</span>Book 3 discovery calls<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card"><span class="card-icon">💰</span>Close first Clarity or Growth engagement<span class="tag tag-cephleau">Cephleau</span></div>
+
+    <div class="section-label">🌐 Catena Language Solutions</div>
+    <div class="card"><span class="card-icon">📜</span>Research CO court interpreter cert tiers<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🖥️</span>Register on BidNet (CO state courts)<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">✉️</span>Email FSDPurchasing@judicial.state.co.us<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🏛️</span>Register with Denver Municipal Court purchasing<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🤝</span>Apply to subcontract: LanguageLine<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🤝</span>Apply to subcontract: CyraCom<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🤝</span>Apply to subcontract: GLOBO<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🤝</span>Apply to subcontract: Propio<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🏥</span>UCHealth vendor credentialing (Green Security)<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🏥</span>Contact Denver Health Language Services<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🏥</span>Contact Children's Colorado Language Services<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">🔗</span>Join NAJIT Corporate ($250/yr)<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">👤</span>Begin interpreter roster recruitment<span class="tag tag-catena">Catena</span></div>
+    <div class="card"><span class="card-icon">📋</span>Build scheduling system for assignments<span class="tag tag-catena">Catena</span></div>
+  </div>
+
+  <!-- IN PROGRESS -->
+  <div class="column">
+    <div class="col-header">
+      <div class="dot dot-yellow"></div>
+      <h2>In Progress</h2>
+      <span class="count">0</span>
+    </div>
+    <div style="color:#334155; font-size:0.82rem; text-align:center; padding: 40px 0;">
+      Nothing in progress yet.<br><br>
+      Start with the LLCs this weekend. 👆
+    </div>
+  </div>
+
+  <!-- DONE -->
+  <div class="column">
+    <div class="col-header">
+      <div class="dot dot-green"></div>
+      <h2>Done</h2>
+      <span class="count">8</span>
+    </div>
+    <div class="card done"><span class="card-icon">✅</span>Name both businesses<span class="tag tag-legal">Legal</span></div>
+    <div class="card done"><span class="card-icon">✅</span>Build Cephleau website<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card done"><span class="card-icon">✅</span>Design service packages (Clarity/Growth/Transform)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card done"><span class="card-icon">✅</span>Draft Catena contractor agreement<span class="tag tag-catena">Catena</span></div>
+    <div class="card done"><span class="card-icon">✅</span>LLC research (CO vs WY — decision made)<span class="tag tag-legal">Legal</span></div>
+    <div class="card done"><span class="card-icon">✅</span>Catena market research (courts/hospitals/agencies)<span class="tag tag-catena">Catena</span></div>
+    <div class="card done"><span class="card-icon">✅</span>LinkedIn outreach templates (5 messages)<span class="tag tag-cephleau">Cephleau</span></div>
+    <div class="card done"><span class="card-icon">✅</span>LinkedIn thought leadership posts (3 posts)<span class="tag tag-cephleau">Cephleau</span></div>
+  </div>
+
+</div>
+
+<div class="resources">
+  <h3>📌 Resources</h3>
+  <div class="resource-grid">
+    <div class="resource-item">
+      <div class="res-label">LLC Formation Plan</div>
+      <span class="res-file">llc-formation-plan.md</span>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">LinkedIn Launch Kit</div>
+      <span class="res-file">cephleau-consulting/linkedin-launch-kit.md</span>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">Catena Contractor Agreement</div>
+      <span class="res-file">catena-language-solutions/interpreter-contractor-agreement.md</span>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">Catena Market Research</div>
+      <span class="res-file">catena-language-solutions/contract-guide.md</span>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">CO Secretary of State</div>
+      <a href="https://www.coloradosos.gov" target="_blank">coloradosos.gov</a>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">IRS EIN Application</div>
+      <a href="https://www.irs.gov/ein" target="_blank">irs.gov/ein</a>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">BidNet (CO Courts)</div>
+      <a href="https://www.bidnetdirect.com" target="_blank">bidnetdirect.com</a>
+    </div>
+    <div class="resource-item">
+      <div class="res-label">Cephleau Website</div>
+      <a href="https://cephleau.netlify.app" target="_blank">cephleau.netlify.app</a>
+    </div>
+  </div>
+</div>
+
+<div class="updated">🐻 Oso — Last updated 2026-03-21</div>
+
+</body>
+</html>
