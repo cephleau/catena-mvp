@@ -1,4 +1,4 @@
-# 🐻 Oso Kanban — Business Launch Tracker
+# 🐙 Octo Kanban — Business Launch Tracker
 _Last updated: 2026-03-21_
 
 ---
