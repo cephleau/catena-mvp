@@ -15,15 +15,15 @@
   />
   <style>
     :root {
-      --bg: #f7f9fb;
-      --surface: #ffffff;
-      --text: #10222b;
-      --muted: #5f7280;
-      --primary: #0f5c6e;
-      --primary-dark: #0b4755;
-      --accent: #c8a96b;
-      --border: #d9e2e8;
-      --shadow: 0 10px 30px rgba(16, 34, 43, 0.08);
+      --bg: #0f1f35;
+      --surface: #1a2f4a;
+      --text: #e8eef5;
+      --muted: #a8b4c4;
+      --primary: #ff6b35;
+      --primary-dark: #e55a2b;
+      --accent: #ffd60a;
+      --border: #2a3f5a;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       --radius: 18px;
       --max-width: 1180px;
     }
@@ -132,9 +132,9 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(247, 249, 251, 0.9);
+      background: rgba(15, 31, 53, 0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(217, 226, 232, 0.7);
+      border-bottom: 1px solid rgba(42, 63, 90, 0.7);
     }
 
     .nav-wrap {
@@ -160,8 +160,8 @@
       border-radius: 12px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
+      background: linear-gradient(135deg, #ff6b35, #ffd60a);
+      color: #0f1f35;
       font-weight: 800;
       box-shadow: var(--shadow);
     }
@@ -179,7 +179,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--primary);
+      color: #ff6b35;
     }
 
     .menu-toggle {
@@ -236,7 +236,7 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 18px;
-      background: linear-gradient(180deg, #ffffff, #f4f8fa);
+      background: linear-gradient(180deg, #253859, #1a2f4a);
     }
 
     .diagram-label {
@@ -266,7 +266,7 @@
     }
 
     .stat {
-      background: #eef4f7;
+      background: rgba(255, 107, 53, 0.15);
       border-radius: 16px;
       padding: 16px;
       text-align: center;
@@ -320,8 +320,8 @@
       border-radius: 14px;
       display: grid;
       place-items: center;
-      background: rgba(15, 92, 110, 0.12);
-      color: var(--primary);
+      background: rgba(255, 107, 53, 0.2);
+      color: #ffd60a;
       font-weight: 800;
       margin-bottom: 18px;
     }
@@ -425,14 +425,14 @@
       min-height: 360px;
       border-radius: 28px;
       background:
-        radial-gradient(circle at top left, rgba(200, 169, 107, 0.25), transparent 35%),
-        linear-gradient(135deg, var(--primary), #143d49);
+        radial-gradient(circle at top left, rgba(255, 107, 53, 0.3), transparent 35%),
+        linear-gradient(135deg, #1a2f4a, #0f1f35);
       box-shadow: var(--shadow);
       display: flex;
       align-items: end;
       justify-content: start;
       padding: 26px;
-      color: white;
+      color: #ffd60a;
       font-size: 2rem;
       font-weight: 800;
     }
@@ -452,8 +452,8 @@
 
     /* CTA */
     .cta-box {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: white;
+      background: linear-gradient(135deg, #ff6b35, #e55a2b);
+      color: #0f1f35;
       border-radius: 30px;
       padding: 42px;
       box-shadow: var(--shadow);
@@ -465,27 +465,27 @@
     }
 
     .cta-box p {
-      color: rgba(255, 255, 255, 0.84);
+      color: rgba(15, 31, 53, 0.9);
       max-width: 650px;
       margin-top: 10px;
     }
 
     .cta-box .btn-secondary {
-      border-color: white;
-      color: white;
+      border-color: #0f1f35;
+      color: #0f1f35;
     }
 
     .cta-box .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(15, 31, 53, 0.15);
     }
 
     .cta-box .btn-primary {
-      background: white;
-      color: var(--primary-dark);
+      background: #ffd60a;
+      color: #0f1f35;
     }
 
     .cta-box .btn-primary:hover {
-      background: #f2f5f7;
+      background: #ffc200;
     }
 
     /* Footer */
@@ -510,7 +510,7 @@
     }
 
     .footer-links a:hover {
-      color: var(--primary);
+      color: #ff6b35;
     }
 
     /* Responsive */
@@ -719,7 +719,7 @@
     </section>
 
     <!-- Who It Helps -->
-    <section class="section" style="background:#edf3f6;">
+    <section class="section" style="background:#142340;">
       <div class="container">
         <span class="eyebrow">Who It Helps</span>
         <h2 class="section-title">Built for leaders navigating complexity.</h2>
@@ -786,7 +786,7 @@
     </section>
 
     <!-- Services -->
-    <section class="section" id="services" style="background:#edf3f6;">
+    <section class="section" id="services" style="background:#142340;">
       <div class="container">
         <span class="eyebrow">Signature Services</span>
         <h2 class="section-title">Focused offers that solve real operational pain.</h2>
@@ -871,7 +871,7 @@
     </section>
 
     <!-- Case Studies -->
-    <section class="section" id="case-studies" style="background:#edf3f6;">
+    <section class="section" id="case-studies" style="background:#142340;">
       <div class="container">
         <span class="eyebrow">Results & Use Cases</span>
         <h2 class="section-title">Outcome oriented work, even when the problem is messy.</h2>
