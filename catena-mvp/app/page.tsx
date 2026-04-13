@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import WarpShaderHero from '@/components/ui/warp-shader-hero'
+import CatenaHero from '@/components/ui/catena-hero'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-900">
-      {/* Warp Shader Hero */}
-      <WarpShaderHero />
+      {/* Catena Hero */}
+      <CatenaHero />
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
