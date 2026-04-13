@@ -1,12 +1,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import WarpShaderHero from '@/components/ui/warp-shader-hero'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-900">
+      {/* Warp Shader Hero */}
+      <WarpShaderHero />
+
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <Image 
