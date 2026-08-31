@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cephleau Consulting — Process Improvement for Growing Businesses</title>
+    <meta name="description" content="Transform your operations with data-driven process improvement. Enterprise-grade consulting for businesses ready to scale." />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #0f0f0f;
+            --accent: #10b981;
+            --accent-dark: #059669;
+            --text: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --border: #2a2a2a;
+            --bg: #0a0a0a;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Geist', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 60px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-bottom: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat {
+            padding: 1.5rem;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .hero-visual svg {
+            width: 100%;
+            max-width: 300px;
+            filter: drop-shadow(0 10px 30px rgba(16, 185, 129, 0.15));
+        }
+
+        /* Services */
+        .services {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--primary);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.05);
+            transform: scale(1.02);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.1);
+            transform: translateY(-8px);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-range {
+            font-size: 1.8rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .pricing-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-list li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-list li::before {
+            content: '✓';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* Industries */
+        .industries {
+            padding: 5rem 2rem;
+            background: var(--primary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .industries-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .industry-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .industry-item:hover {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .industry-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .industry-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .industry-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Contact Form */
+        .contact-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .contact-item-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .contact-item-content h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .contact-item-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .contact-item-content a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-item-content a:hover {
+            opacity: 0.8;
+        }
+
+        /* Form */
+        .contact-form {
+            background: var(--primary);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            animation: slideUpForm 0.6s ease-out backwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.25s; }
+        .form-group:nth-child(5) { animation-delay: 0.3s; }
+
+        @keyframes slideUpForm {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-family: 'Geist', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover,
+        .form-group select:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            margin-top: 2rem;
+        }
+
+        .form-notice {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--primary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.02);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* Process */
+        .process {
+            padding: 5rem 2rem;
+            background: var(--primary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            font-family: 'Geist Mono', monospace;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .process-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Results */
+        .results {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+        }
+
+        .results-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 2rem;
+            animation: slideUp 0.8s ease-out backwards;
+        }
+
+        .result-item:nth-child(1) { animation-delay: 0.1s; }
+        .result-item:nth-child(2) { animation-delay: 0.2s; }
+        .result-item:nth-child(3) { animation-delay: 0.3s; }
+        .result-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .result-label {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                margin-left: 1rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                CEPHLEAU<span class="logo-accent">.</span>
+            </div>
+            <div>
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div>
+                <h1>
+                    Stop <span class="accent">guessing</span>.<br>
+                    Start <span class="accent">improving</span>.
+                </h1>
+                <p>
+                    We help businesses identify what's slowing them down, design better processes, and build the operational clarity needed to scale with confidence.
+                </p>
+                <div class="cta-group">
+                    <button class="btn btn-primary">Book Consultation</button>
+                    <button class="btn btn-outline">Learn More</button>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Transformations</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">30%</div>
+                        <div class="stat-label">Avg. Efficiency Gain</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">Industries</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Animated octopus icon -->
+                    <circle cx="100" cy="80" r="35" fill="#10b981" opacity="0.8"/>
+                    <path d="M 75 110 Q 70 140 75 160" stroke="#10b981" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 100 110 Q 100 145 100 165" stroke="#10b981" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 125 110 Q 130 140 125 160" stroke="#10b981" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <circle cx="90" cy="70" r="4" fill="white"/>
+                    <circle cx="110" cy="70" r="4" fill="white"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <span class="section-label">What We Do</span>
+            <h2 class="section-title">Built for businesses ready to run better</h2>
+            <p class="section-subtitle">From diagnosing bottlenecks to implementing lasting change, we partner with you every step of the way.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3>Operational Diagnostics</h3>
+                <p>KPI analysis, root cause identification, efficiency benchmarking, and comprehensive process audits.</p>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Process Optimization</h3>
+                <p>End-to-end workflow mapping, bottleneck elimination, lean improvement, and SOP design.</p>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>Systems Engineering</h3>
+                <p>Cross-functional process design, systems integration, digital alignment, and automation mapping.</p>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Data Governance</h3>
+                <p>Data ownership frameworks, KPI standardization, quality assessment, and governance design.</p>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Implementation Support</h3>
+                <p>Execution tracking, change management, KPI monitoring, and adoption support.</p>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">👔</div>
+                <h3>Executive Advisory</h3>
+                <p>Strategic alignment, organizational design, transformation leadership, and performance strategy.</p>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="process">
+        <div class="process-container">
+            <div class="section-header">
+                <span class="section-label">Our Approach</span>
+                <h2 class="section-title">How we work with you</h2>
+                <p class="section-subtitle">A structured, proven approach that fits your business — not a one-size-fits-all template.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>We learn about your business, challenges, and where you want to go.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Audit</h3>
+                    <p>We map processes end-to-end and identify what's actually happening.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Design</h3>
+                    <p>You receive a clear, prioritized roadmap built for your operation.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Execute</h3>
+                    <p>We support implementation and establish metrics for lasting impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results">
+        <div class="results-container">
+            <div class="section-header">
+                <span class="section-label">Results That Matter</span>
+                <h2 class="section-title">What our clients achieve</h2>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-number">38%</div>
+                    <p class="result-label">Avg Cost Reduction</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-number">52%</div>
+                    <p class="result-label">Efficiency Gains</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-number">6mo</div>
+                    <p class="result-label">Avg Implementation</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-number">95%</div>
+                    <p class="result-label">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <span class="section-label">Service Packages</span>
+            <h2 class="section-title">Transparent pricing for every scale</h2>
+            <p class="section-subtitle">From diagnostic assessments to enterprise transformations, we have solutions that fit your business.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Diagnostics</h3>
+                <div class="pricing-range">$2.5K — $7.5K</div>
+                <p class="pricing-description">Initial assessment and quick-win identification</p>
+                <ul class="pricing-list">
+                    <li>Process audit</li>
+                    <li>KPI analysis</li>
+                    <li>Bottleneck identification</li>
+                    <li>Recommendations report</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card featured">
+                <h3>Optimization</h3>
+                <div class="pricing-range">$10K — $50K</div>
+                <p class="pricing-description">End-to-end process redesign with execution</p>
+                <ul class="pricing-list">
+                    <li>Workflow redesign</li>
+                    <li>Implementation support</li>
+                    <li>Team training</li>
+                    <li>KPI monitoring (3-6 mo)</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="pricing-range">$75K — $250K+</div>
+                <p class="pricing-description">Multi-function transformation & strategic overhaul</p>
+                <ul class="pricing-list">
+                    <li>Full organizational assessment</li>
+                    <li>Systems integration</li>
+                    <li>Change management</li>
+                    <li>6-12 month engagement</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Retainer Advisory</h3>
+                <div class="pricing-range">$5K — $20K/mo</div>
+                <p class="pricing-description">Ongoing strategic consulting & optimization</p>
+                <ul class="pricing-list">
+                    <li>Executive advisory</li>
+                    <li>Continuous optimization</li>
+                    <li>Quarterly reviews</li>
+                    <li>Leadership coaching</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="industries">
+        <div class="industries-container">
+            <div class="section-header">
+                <span class="section-label">Industries We Serve</span>
+                <h2 class="section-title">Specialized expertise in complex operations</h2>
+            </div>
+
+            <div class="industries-grid">
+                <div class="industry-item">
+                    <div class="industry-icon">✈️</div>
+                    <h3>Aerospace & Defense</h3>
+                    <p>Mission-critical systems and supply chain optimization</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">🏭</div>
+                    <h3>Manufacturing</h3>
+                    <p>Production efficiency and lean operations</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">📦</div>
+                    <h3>Logistics & Supply Chain</h3>
+                    <p>Distribution networks and inventory optimization</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">🏢</div>
+                    <h3>Enterprise Operations</h3>
+                    <p>Large-scale transformation and systems integration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Let's talk about your operations</h2>
+        </div>
+
+        <div class="contact-container">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <div>
+                    <h2>Ready to Transform?</h2>
+                    <p>
+                        Schedule a free 30-minute discovery call. We'll learn about your business, understand your challenges, and tell you honestly whether and how we can help.
+                    </p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">📧</div>
+                    <div class="contact-item-content">
+                        <h3>Email</h3>
+                        <p><a href="mailto:hello@cephleau.com">hello@cephleau.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">📍</div>
+                    <div class="contact-item-content">
+                        <h3>Location</h3>
+                        <p>Denver, Colorado</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">💼</div>
+                    <div class="contact-item-content">
+                        <h3>Response Time</h3>
+                        <p>We respond within one business day</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">🔒</div>
+                    <div class="contact-item-content">
+                        <h3>Confidentiality</h3>
+                        <p>All conversations are confidential. NDA available upon request.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <div class="success-message" id="successMessage">
+                    ✓ Thank you! We'll be in touch within one business day.
+                </div>
+
+                <form id="contactForm" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company / Organization *</label>
+                        <input type="text" id="company" name="company" placeholder="Your company name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="challenge">What's your biggest operational challenge? *</label>
+                        <textarea id="challenge" name="challenge" placeholder="Tell us what's slowing you down, what keeps breaking, or where you feel stuck..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="team-size">Team Size</label>
+                        <select id="team-size" name="team_size">
+                            <option value="">Select team size</option>
+                            <option>1–50 employees</option>
+                            <option>51–200 employees</option>
+                            <option>200–1,000 employees</option>
+                            <option>1,000+ employees</option>
+                        </select>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Discovery Request →</button>
+                    </div>
+
+                    <p class="form-notice">
+                        By submitting you agree to receive a response from Cephleau Consulting. We don't spam — ever.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>CEPHLEAU</h3>
+                <p>Process improvement consulting for businesses ready to run better, scale smarter, and stop guessing.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Process Audits</a></li>
+                    <li><a href="#">Process Design</a></li>
+                    <li><a href="#">Implementation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Cephleau Consulting. All rights reserved. | Denver, Colorado</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Button hover ripple
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.marginLeft = '-10px';
+                ripple.style.marginTop = '-10px';
+                
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                company: formData.get('company'),
+                email: formData.get('email'),
+                challenge: formData.get('challenge'),
+                team_size: formData.get('team_size'),
+                timestamp: new Date().toISOString()
+            };
+
+            // Log to console (for demo)
+            console.log('Contact form submission:', data);
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+
+            // Clear form
+            this.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+            }, 5000);
+
+            // In production, this would send to your backend or email service
+            // For now, you can integrate with:
+            // - Formspree (email form service)
+            // - Netlify Forms (if deployed on Netlify)
+            // - Your own backend API
+        });
+
+        // Form input animations
+        document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.01)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

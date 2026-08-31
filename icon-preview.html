@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cephleau Industry Icons Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+        
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .icon-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 127, 80, 0.4);
+        }
+        
+        .icon-display {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            height: 100px;
+            align-items: center;
+        }
+        
+        svg {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .icon-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .icon-description {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .feedback-section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .feedback-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feedback-section p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐙 Cephleau Industry Icons</h1>
+        <p class="subtitle">Minimalist line-art with varied stroke weights</p>
+        
+        <div class="icons-grid">
+            <!-- Aerospace & Defense -->
+            <div class="icon-card">
+                <div class="icon-display">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Fuselage (main body) -->
+                        <path d="M32 8 L36 20 L36 44 L28 44 L28 20 Z" stroke="#ff7f50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Wings -->
+                        <path d="M28 28 L12 32 L28 36" stroke="#ff7f50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M36 28 L52 32 L36 36" stroke="#ff7f50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Tail fins -->
+                        <path d="M32 44 L30 56 L32 54 L34 56 Z" stroke="#ff7f50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#ff7f50" fill-opacity="0.3"/>
+                        
+                        <!-- Cockpit -->
+                        <circle cx="32" cy="14" r="2.5" fill="#ff7f50"/>
+                        <path d="M30 12 Q32 10 34 12" stroke="#ff7f50" stroke-width="1.5" stroke-linecap="round"/>
+                        
+                        <!-- Engine detail -->
+                        <circle cx="26" cy="38" r="2" stroke="#ff7f50" stroke-width="1.5"/>
+                        <circle cx="38" cy="38" r="2" stroke="#ff7f50" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="icon-title">Aerospace & Defense</div>
+                <div class="icon-description">Mission-critical systems and supply chain optimization</div>
+            </div>
+            
+            <!-- Manufacturing -->
+            <div class="icon-card">
+                <div class="icon-display">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Main building -->
+                        <rect x="16" y="24" width="20" height="28" stroke="#00d97e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Smokestack/chimney -->
+                        <rect x="30" y="10" width="6" height="16" stroke="#00d97e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M30 10 Q30 6 33 4 Q36 6 36 10" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        
+                        <!-- Windows -->
+                        <rect x="20" y="30" width="4" height="4" stroke="#00d97e" stroke-width="1.5"/>
+                        <rect x="28" y="30" width="4" height="4" stroke="#00d97e" stroke-width="1.5"/>
+                        <rect x="20" y="40" width="4" height="4" stroke="#00d97e" stroke-width="1.5"/>
+                        <rect x="28" y="40" width="4" height="4" stroke="#00d97e" stroke-width="1.5"/>
+                        
+                        <!-- Machinery/gear on right -->
+                        <circle cx="45" cy="32" r="6" stroke="#00d97e" stroke-width="2"/>
+                        <circle cx="45" cy="32" r="3" stroke="#00d97e" stroke-width="1.5"/>
+                        <path d="M45 18 L45 26 M45 38 L45 46" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M39 32 L41 32 M49 32 L51 32" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        
+                        <!-- Base line -->
+                        <line x1="12" y1="52" x2="52" y2="52" stroke="#00d97e" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="icon-title">Manufacturing</div>
+                <div class="icon-description">Production efficiency and lean operations</div>
+            </div>
+            
+            <!-- Logistics & Supply Chain -->
+            <div class="icon-card">
+                <div class="icon-display">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Truck body -->
+                        <rect x="18" y="28" width="28" height="16" stroke="#ff7f50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Cabin -->
+                        <rect x="10" y="32" width="8" height="12" stroke="#ff7f50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="14" cy="38" r="1.5" fill="#ff7f50"/>
+                        
+                        <!-- Wheels -->
+                        <circle cx="24" cy="46" r="4" stroke="#ff7f50" stroke-width="2.5"/>
+                        <circle cx="24" cy="46" r="1.5" fill="#ff7f50"/>
+                        <circle cx="40" cy="46" r="4" stroke="#ff7f50" stroke-width="2.5"/>
+                        <circle cx="40" cy="46" r="1.5" fill="#ff7f50"/>
+                        
+                        <!-- Cargo boxes on truck bed -->
+                        <rect x="30" y="22" width="6" height="6" stroke="#ff7f50" stroke-width="1.5"/>
+                        <rect x="38" y="22" width="6" height="6" stroke="#ff7f50" stroke-width="1.5"/>
+                        <line x1="33" y1="22" x2="33" y2="28" stroke="#ff7f50" stroke-width="1" opacity="0.6"/>
+                        <line x1="41" y1="22" x2="41" y2="28" stroke="#ff7f50" stroke-width="1" opacity="0.6"/>
+                        
+                        <!-- Direction arrow -->
+                        <path d="M48 38 L54 38 M52 34 L54 38 L52 42" stroke="#ff7f50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="icon-title">Logistics & Supply Chain</div>
+                <div class="icon-description">Distribution networks and inventory optimization</div>
+            </div>
+            
+            <!-- Enterprise Operations -->
+            <div class="icon-card">
+                <div class="icon-display">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Main central node -->
+                        <circle cx="32" cy="32" r="5" stroke="#00d97e" stroke-width="2.5"/>
+                        <circle cx="32" cy="32" r="2" fill="#00d97e" opacity="0.5"/>
+                        
+                        <!-- Upper nodes -->
+                        <circle cx="16" cy="16" r="3.5" stroke="#00d97e" stroke-width="2"/>
+                        <circle cx="48" cy="16" r="3.5" stroke="#00d97e" stroke-width="2"/>
+                        
+                        <!-- Lower nodes -->
+                        <circle cx="16" cy="48" r="3.5" stroke="#00d97e" stroke-width="2"/>
+                        <circle cx="48" cy="48" r="3.5" stroke="#00d97e" stroke-width="2"/>
+                        
+                        <!-- Connection lines -->
+                        <line x1="32" y1="32" x2="16" y2="16" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="32" y1="32" x2="48" y2="16" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="32" y1="32" x2="16" y2="48" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="32" y1="32" x2="48" y2="48" stroke="#00d97e" stroke-width="1.5" stroke-linecap="round"/>
+                        
+                        <!-- Cross connections -->
+                        <line x1="16" y1="16" x2="48" y2="16" stroke="#00d97e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+                        <line x1="16" y1="48" x2="48" y2="48" stroke="#00d97e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="icon-title">Enterprise Operations</div>
+                <div class="icon-description">Large-scale transformation and systems integration</div>
+            </div>
+        </div>
+        
+        <div class="feedback-section">
+            <h2>Next Steps</h2>
+            <p>What do you think? Would you like any adjustments to these icons before we integrate them into the site?</p>
+        </div>
+    </div>
+</body>
+</html>

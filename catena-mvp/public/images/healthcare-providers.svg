@@ -1,0 +1,21 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bgGrad2)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="150" cy="150" r="60" fill="none" stroke="#1ED4D4" stroke-width="1" opacity="0.1"/>
+  <circle cx="450" cy="250" r="80" fill="none" stroke="#1ED4D4" stroke-width="1" opacity="0.1"/>
+  
+  <!-- Text -->
+  <text x="300" y="180" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#1ED4D4" text-anchor="middle" dominant-baseline="middle">
+    24/7 Healthcare
+  </text>
+  <text x="300" y="240" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#1ED4D4" text-anchor="middle" dominant-baseline="middle">
+    Interpretation
+  </text>
+</svg>

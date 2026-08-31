@@ -97,7 +97,35 @@ export default function CatenaLandingPage() {
     <div className={styles.container}>
       {/* HEADER */}
       <header className={styles.header}>
-        {/* Header content goes here */}
+        <div className={styles.headerContent}>
+          <div className={styles.logo}>
+            <Image
+              src="/images/catena-logo-mark.png"
+              alt="Catena Language Partners"
+              width={34}
+              height={34}
+            />
+            <div className={styles.logoText}>
+              <div className={styles.logoBrand}>Catena</div>
+              <div className={styles.logoSubtext}>LANGUAGE PARTNERS</div>
+            </div>
+          </div>
+
+          <nav className={styles.nav}>
+            <a href="#how-it-works" className={styles.navLink}>How It Works</a>
+            <a href="#" className={styles.navLink}>For Providers</a>
+            <a href="#" className={styles.navLink}>For Interpreters</a>
+            <a href="#" className={styles.navLink}>About</a>
+            <a href="#" className={styles.navLink}>Resources</a>
+          </nav>
+
+          <button
+            className={styles.ctaButton}
+            onClick={() => setModalState('request')}
+          >
+            Request an Interpreter
+          </button>
+        </div>
       </header>
 
       {/* HERO */}

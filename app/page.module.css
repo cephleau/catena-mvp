@@ -1,0 +1,136 @@
+/* Catena Landing Page Styles */
+
+.container {
+}
+
+.header {
+}
+
+.hero {
+}
+
+.challenge {
+}
+
+.howCatenaHelps {
+}
+
+.complianceBand {
+}
+
+.howItWorks {
+}
+
+.deliveryModes {
+}
+
+.finalCta {
+}
+
+.footer {
+}
+
+.modal {
+}
+
+.modalOverlay {
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 64px;
+  border-bottom: 1px solid #E8EBF1;
+  background: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.logoBrand {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: #122C4D;
+  letter-spacing: 0.01em;
+}
+
+.logoSubtext {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  color: #2E9E8E;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #3A4453;
+  flex-grow: 1;
+}
+
+.navLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #2E9E8E;
+}
+
+.ctaButton {
+  background: #122C4D;
+  border: none;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #0d1a34;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 32px;
+  }
+
+  .headerContent {
+    gap: 20px;
+  }
+
+  .nav {
+    display: none;
+  }
+}

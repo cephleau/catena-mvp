@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-14T03:50:36.019Z",
+  "entries": {
+    "memory:memory/2026-04-12.md:1:53": {
+      "key": "memory:memory/2026-04-12.md:1:53",
+      "path": "memory/2026-04-12.md",
+      "startLine": 1,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "# Daily Log — Sunday, April 12, 2026 ## Session: Catena Language Solutions Website Build **Time:** 19:25–21:03 MDT **Status:** Building professional landing page for catenalanguagepartners.com ### Attempts & Learnings 1. **Warp Shader Hero** (Failed) - @paper-design/shaders-react not rendering - Dependency issues with WebGL - Abandoned in favor of simpler approach 2. **Clean Gradient Hero** (Failed) - Created professional hero with gradient background - Tailwind CSS not compiling properly - layout.tsx not applying dark background styles - CSS pipeline broken 3. **Minimalist Hero + Full Landing Page** (Built but broken) - Created complete 7-section landing page",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4060747792367252,
+      "maxScore": 0.745422284258162,
+      "firstRecalledAt": "2026-04-14T03:36:56.681Z",
+      "lastRecalledAt": "2026-04-14T03:50:36.019Z",
+      "queryHashes": [
+        "173895d2b79e",
+        "a6490a3c14c2"
+      ],
+      "recallDays": [
+        "2026-04-13"
+      ],
+      "conceptTags": [
+        "catenalanguagepartners.com",
+        "paper-design/shaders-react",
+        "layout.tsx",
+        "7-section",
+        "log",
+        "sunday",
+        "april",
+        "catena"
+      ]
+    },
+    "memory:memory/2026-04-12.md:43:94": {
+      "key": "memory:memory/2026-04-12.md:43:94",
+      "path": "memory/2026-04-12.md",
+      "startLine": 43,
+      "endLine": 94,
+      "source": "memory",
+      "snippet": "### Key Learnings - Next.js Tailwind CSS setup was broken (CSS not compiling) - Manual Framer editing is too slow for iteration - Need to focus on **deployment** not perfection - Carlos wants speed over process # Daily Log — Sunday, April 12, 2026 ## Session: Catena Language Solutions Website Build **Time:** 19:25–21:03 MDT **Status:** Building professional landing page for catenalanguagepartners.com ### Attempts & Learnings 1. **Warp Shader Hero** (Failed) - @paper-design/shaders-react not rendering - Dependency issues with WebGL - Abandoned in favor of simpler approach 2. **Clean Gradient Hero** (Failed) - Created professional hero with gradient background - Tailwind C",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.2620430571638934,
+      "maxScore": 0.6758859407573568,
+      "firstRecalledAt": "2026-04-14T03:36:56.681Z",
+      "lastRecalledAt": "2026-04-14T03:50:36.019Z",
+      "queryHashes": [
+        "173895d2b79e",
+        "a6490a3c14c2"
+      ],
+      "recallDays": [
+        "2026-04-13"
+      ],
+      "conceptTags": [
+        "next.js",
+        "catenalanguagepartners.com",
+        "paper-design/shaders-react",
+        "key",
+        "learnings",
+        "tailwind",
+        "css",
+        "setup"
+      ]
+    },
+    "memory:memory/2026-04-05.md:1:28": {
+      "key": "memory:memory/2026-04-05.md:1:28",
+      "path": "memory/2026-04-05.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# Session Notes - April 5, 2026 ## Catena Site Deployment Issue **Problem:** catenalanguagepartners.com was down. **Root Cause:** Netlify free tier credits exhausted. Site cannot deploy until billing is added. **Solution Attempted:** Deploy to Vercel instead (free alternative). **Status:** In progress - Catena MVP code is in `/Users/cephleau/.openclaw/workspace/catena-mvp` - GitHub repo created: `https://github.com/cephleau/catena-language-solutions` - Code needs to be pushed to GitHub (token auth failed multiple times) - Vercel import process started but Carlos having UI navigation difficulty **Next Steps:** 1. Push catena-mvp code to GitHub repo (may need fresh PAT or SSH key setup)",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6715880292060309,
+      "maxScore": 0.6715880292060309,
+      "firstRecalledAt": "2026-04-14T03:50:36.019Z",
+      "lastRecalledAt": "2026-04-14T03:50:36.019Z",
+      "queryHashes": [
+        "a6490a3c14c2"
+      ],
+      "recallDays": [
+        "2026-04-13"
+      ],
+      "conceptTags": [
+        "catenalanguagepartners.com",
+        "users/cephleau",
+        "openclaw/workspace/catena-mvp",
+        "catena-mvp",
+        "april",
+        "catena",
+        "site",
+        "deployment"
+      ]
+    }
+  }
+}

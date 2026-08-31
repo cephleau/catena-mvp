@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catena Interpreter Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
+            color: #e8e8e8;
+            font-family: 'IBM Plex Mono', monospace;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(0deg, transparent 24%, rgba(255, 0, 150, 0.05) 25%, rgba(255, 0, 150, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 150, 0.05) 75%, rgba(255, 0, 150, 0.05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(255, 0, 150, 0.05) 25%, rgba(255, 0, 150, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 150, 0.05) 75%, rgba(255, 0, 150, 0.05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            border-bottom: 2px solid #ff0096;
+            padding-bottom: 2rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #ff0096, #ff6b00, #ff0096);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-badge {
+            background: #ff0096;
+            color: #0a0e27;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 150, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 0, 150, 0); }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: rgba(26, 31, 58, 0.6);
+            border: 2px solid rgba(255, 0, 150, 0.2);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 150, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: #ff0096;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 0, 150, 0.2);
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ff0096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #ff0096;
+            margin: 1rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0a0c0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .assignments {
+            margin-top: 2rem;
+        }
+
+        .assignment-item {
+            background: rgba(255, 0, 150, 0.05);
+            border-left: 4px solid #ff0096;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .assignment-item:hover {
+            background: rgba(255, 0, 150, 0.1);
+            transform: translateX(8px);
+        }
+
+        .assignment-time {
+            font-size: 0.85rem;
+            color: #ff6b00;
+            font-weight: 600;
+        }
+
+        .assignment-details {
+            margin-top: 0.5rem;
+            color: #e8e8e8;
+        }
+
+        .assignment-language {
+            display: inline-block;
+            background: #ff0096;
+            color: #0a0e27;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .earnings-bar {
+            margin-top: 1.5rem;
+        }
+
+        .earnings-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 0, 150, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0096, #ff6b00);
+            width: 72%;
+            animation: fillBar 1.5s ease-out;
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+            to { width: 72%; }
+        }
+
+        .cta-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: #ff0096;
+            color: #0a0e27;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 0, 150, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ff0096;
+            border: 2px solid #ff0096;
+        }
+
+        .btn-secondary:hover {
+            background: #ff0096;
+            color: #0a0e27;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .day-slot {
+            aspect-ratio: 1;
+            background: rgba(255, 0, 150, 0.1);
+            border: 1px solid rgba(255, 0, 150, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .day-slot:hover {
+            background: rgba(255, 0, 150, 0.2);
+            border-color: #ff0096;
+        }
+
+        .day-slot.available {
+            background: rgba(255, 0, 150, 0.3);
+            border-color: #ff0096;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 0, 150, 0.2);
+            text-align: center;
+            color: #a0a0c0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .cta-section {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CATENA</h1>
+            <div class="status-badge">🟢 ACTIVE</div>
+        </header>
+
+        <div class="grid">
+            <!-- Earnings Card -->
+            <div class="card">
+                <div class="card-title">This Month</div>
+                <div class="stat-number">$3,240</div>
+                <div class="stat-label">Total Earnings</div>
+                <div class="earnings-bar">
+                    <div class="earnings-label">
+                        <span>Progress to Goal</span>
+                        <span>72%</span>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Assignments -->
+            <div class="card">
+                <div class="card-title">Active</div>
+                <div class="stat-number">4</div>
+                <div class="stat-label">Pending Assignments</div>
+                <div class="assignments">
+                    <div class="assignment-item">
+                        <div class="assignment-time">Today @ 2:00 PM</div>
+                        <div class="assignment-details">Medical Consultation</div>
+                        <span class="assignment-language">Spanish</span>
+                    </div>
+                    <div class="assignment-item">
+                        <div class="assignment-time">Tomorrow @ 10:00 AM</div>
+                        <div class="assignment-details">Court Hearing</div>
+                        <span class="assignment-language">Spanish</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="card">
+                <div class="card-title">Availability</div>
+                <div class="stat-label">Next 7 Days</div>
+                <div class="schedule-grid">
+                    <div class="day-slot available">Mon</div>
+                    <div class="day-slot available">Tue</div>
+                    <div class="day-slot">Wed</div>
+                    <div class="day-slot available">Thu</div>
+                    <div class="day-slot available">Fri</div>
+                    <div class="day-slot">Sat</div>
+                    <div class="day-slot available">Sun</div>
+                </div>
+            </div>
+
+            <!-- Rating & Completion -->
+            <div class="card">
+                <div class="card-title">Performance</div>
+                <div class="stat-number">4.8★</div>
+                <div class="stat-label">Interpreter Rating</div>
+                <p style="margin-top: 1.5rem; color: #a0a0c0; font-size: 0.9rem;">
+                    <strong>48</strong> completed assignments<br>
+                    <strong>0</strong> cancellations<br>
+                    <strong>100%</strong> on-time delivery
+                </p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <div>
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; color: #ff0096; text-transform: uppercase; letter-spacing: 1px;">Ready to Work?</h2>
+                <div class="button-group">
+                    <button class="btn-primary">View Opportunities</button>
+                    <button class="btn-secondary">Update Profile</button>
+                </div>
+            </div>
+            <div>
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; color: #ff0096; text-transform: uppercase; letter-spacing: 1px;">Account</h2>
+                <div class="button-group">
+                    <button class="btn-secondary">Settings</button>
+                    <button class="btn-secondary">Support</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Catena Language Solutions © 2026 | Interpreter Dashboard v1.0</p>
+        </footer>
+    </div>
+
+    <script>
+        // Hover ripple effect
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.pointerEvents = 'none';
+                
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

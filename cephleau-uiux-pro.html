@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cephleau — Industrial Operations Optimization</title>
+    <meta name="description" content="Transform aerospace, manufacturing, and logistics operations with data-driven process optimization. Enterprise consulting with measurable results." />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0f1f;
+            --primary: #0f1a2e;
+            --secondary: #1a2847;
+            --accent-1: #00d97e;
+            --accent-2: #00f0b5;
+            --accent-3: #ff6b35;
+            --accent-4: #004aff;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b5c0;
+            --text-tertiary: #7a7f8f;
+            --border-color: #1f2a3f;
+            --surface: #0f1a2e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background mesh */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 217, 126, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.06) 0%, transparent 50%);
+            animation: mesh-shift 20s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes mesh-shift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(40px, 40px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 31, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .nav-logo img {
+            width: 38px;
+            height: 38px;
+            filter: drop-shadow(0 0 8px rgba(0, 217, 126, 0.4));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-2) 50%, var(--accent-1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.2rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+            color: var(--primary-dark);
+            box-shadow: 0 15px 40px rgba(0, 217, 126, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px rgba(0, 217, 126, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-1);
+            border: 2px solid var(--accent-1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 126, 0.1);
+            transform: translateY(-6px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background: rgba(26, 40, 71, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 1.8rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .stat:hover {
+            border-color: var(--accent-1);
+            background: rgba(0, 217, 126, 0.05);
+            transform: translateY(-6px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-1);
+            margin-bottom: 0.3rem;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-animated {
+            width: 350px;
+            height: 350px;
+            animation: 
+                float-smooth 5s ease-in-out infinite,
+                rotate-slow 25s linear infinite;
+            filter: drop-shadow(0 20px 60px rgba(0, 217, 126, 0.3));
+        }
+
+        @keyframes float-smooth {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+
+        @keyframes rotate-slow {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        .glow-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .orb-1 {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 217, 126, 0.4);
+            top: 10%;
+            left: 20%;
+            animation: orbit 8s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 107, 53, 0.3);
+            bottom: 10%;
+            right: 20%;
+            animation: orbit 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes orbit {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, -50px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-1);
+            font-family: 'IBM Plex Mono', monospace;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(26, 40, 71, 0.4) 0%, rgba(15, 26, 46, 0.4) 100%);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 217, 126, 0.15) 0%, transparent 70%);
+            transition: all 0.6s;
+            transform: translateX(-50%);
+        }
+
+        .service-card:hover::before {
+            top: -50%;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-1);
+            background: linear-gradient(135deg, rgba(0, 217, 126, 0.08) 0%, rgba(0, 240, 181, 0.04) 100%);
+            transform: translateY(-16px);
+            box-shadow: 0 30px 70px rgba(0, 217, 126, 0.15);
+        }
+
+        .service-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.25) rotateZ(10deg);
+        }
+
+        .service-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-1);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'IBM Plex Mono', monospace;
+            transition: gap 0.3s;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* Process Section */
+        .process {
+            background: linear-gradient(135deg, rgba(0, 217, 126, 0.02) 0%, rgba(255, 107, 53, 0.02) 100%);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-num {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0, 217, 126, 0.3);
+            font-family: 'Syne', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-num {
+            transform: scale(1.2);
+            box-shadow: 0 20px 50px rgba(0, 217, 126, 0.5);
+        }
+
+        .process-step h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(26, 40, 71, 0.5) 0%, rgba(15, 26, 46, 0.5) 100%);
+            border: 2px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-1);
+            background: linear-gradient(135deg, rgba(0, 217, 126, 0.1) 0%, rgba(0, 240, 181, 0.05) 100%);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 70px rgba(0, 217, 126, 0.15);
+        }
+
+        .pricing-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-amount {
+            font-size: 2.2rem;
+            color: var(--accent-1);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .pricing-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-list li {
+            color: var(--text-secondary);
+            padding: 0.7rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .pricing-list li::before {
+            content: '✓';
+            color: var(--accent-1);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(0, 217, 126, 0.03) 0%, rgba(255, 107, 53, 0.03) 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-item {
+            background: rgba(26, 40, 71, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-1);
+            background: rgba(0, 217, 126, 0.05);
+        }
+
+        .contact-form {
+            background: rgba(26, 40, 71, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            background: rgba(0, 217, 126, 0.05);
+            box-shadow: 0 0 0 4px rgba(0, 217, 126, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-group button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-tertiary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .logo-animated {
+                width: 250px;
+                height: 250px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-logo">
+                <img src="/Users/cephleau/Library/Application Support/Claude/local-agent-mode-sessions/acc318cb-95d9-4b8f-965a-1ab177cf2d68/561af945-c526-4a53-96b1-aac0c8d15aaf/local_e4790ee6-6ab2-4756-af80-46bec69d4d03/outputs/cephleau-site/logo.png" alt="Cephleau">
+                <span>CEPHLEAU</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Transform Your <span style="color: var(--accent-1);">Operations</span></h1>
+                <p>Industrial-grade process optimization for aerospace, manufacturing, and logistics. Data-driven transformation with measurable results.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">Book Discovery Call</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Transformations</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">38%</div>
+                        <div class="stat-label">Avg Cost Reduction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">6mo</div>
+                        <div class="stat-label">Avg Implementation</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="glow-orbs">
+                    <div class="orb orb-1"></div>
+                    <div class="orb orb-2"></div>
+                </div>
+                <img src="/Users/cephleau/Library/Application Support/Claude/local-agent-mode-sessions/acc318cb-95d9-4b8f-965a-1ab177cf2d68/561af945-c526-4a53-96b1-aac0c8d15aaf/local_e4790ee6-6ab2-4756-af80-46bec69d4d03/outputs/cephleau-site/logo.png" alt="Cephleau" class="logo-animated">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Capabilities</span>
+                <h2 class="section-title">Core Services</h2>
+                <p class="section-subtitle">Six specialized competencies to transform your operations from diagnostic to enterprise scale.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Operational Diagnostics</h3>
+                    <p>KPI analysis, root cause identification, efficiency benchmarking, and comprehensive process audits.</p>
+                    <a href="#" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Process Optimization</h3>
+                    <p>End-to-end workflow mapping, bottleneck elimination, lean improvement, and SOP design.</p>
+                    <a href="#" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Systems Engineering</h3>
+                    <p>Cross-functional design, systems integration, digital alignment, and automation mapping.</p>
+                    <a href="#" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Data Governance</h3>
+                    <p>Data ownership frameworks, KPI standardization, quality assessment, and structure design.</p>
+                    <a href="#" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Implementation Support</h3>
+                    <p>Execution tracking, change management, KPI monitoring, and adoption support.</p>
+                    <a href="#" class="service-link">Explore →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👔</div>
+                    <h3>Executive Advisory</h3>
+                    <p>Strategic alignment, organizational design, transformation leadership, and strategy.</p>
+                    <a href="#" class="service-link">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Methodology</span>
+                <h2 class="section-title">How We Transform</h2>
+                <p class="section-subtitle">A proven 4-step approach that delivers measurable, lasting operational change.</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-num">1</div>
+                    <h3>Discovery</h3>
+                    <p>We learn your business, understand challenges, and align on transformation goals.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">2</div>
+                    <h3>Audit</h3>
+                    <p>End-to-end process mapping, data analysis, and optimization opportunity identification.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">3</div>
+                    <h3>Design</h3>
+                    <p>Custom roadmap with quick wins and strategic long-term improvements prioritized.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">4</div>
+                    <h3>Execute</h3>
+                    <p>Implementation support, team training, and sustained KPI tracking for lasting results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Investment</span>
+                <h2 class="section-title">Transparent Pricing</h2>
+                <p class="section-subtitle">Scale from diagnostic to enterprise transformation with clear, predictable pricing.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Diagnostics</h3>
+                    <div class="pricing-amount">$2.5K–$7.5K</div>
+                    <p style="color: var(--text-tertiary); margin-bottom: 1.5rem; font-size: 0.9rem;">Initial assessment & quick-win identification</p>
+                    <ul class="pricing-list">
+                        <li>Process audit</li>
+                        <li>KPI analysis</li>
+                        <li>Bottleneck identification</li>
+                        <li>Recommendations report</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Optimization</h3>
+                    <div class="pricing-amount">$10K–$50K</div>
+                    <p style="color: var(--text-tertiary); margin-bottom: 1.5rem; font-size: 0.9rem;">End-to-end redesign with execution support</p>
+                    <ul class="pricing-list">
+                        <li>Workflow redesign</li>
+                        <li>Implementation support</li>
+                        <li>Team training</li>
+                        <li>KPI monitoring (3–6 mo)</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-amount">$75K–$250K+</div>
+                    <p style="color: var(--text-tertiary); margin-bottom: 1.5rem; font-size: 0.9rem;">Multi-function transformation & strategic overhaul</p>
+                    <ul class="pricing-list">
+                        <li>Full organizational assessment</li>
+                        <li>Systems integration</li>
+                        <li>Change management</li>
+                        <li>6–12 month engagement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Let's Talk</span>
+                <h2 class="section-title">Ready to Transform?</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Start Your Transformation</h3>
+                    <p>Schedule a free 30-minute discovery call. We'll understand your challenges and outline how we can deliver measurable operational improvement.</p>
+                    <div class="contact-item">
+                        <strong style="color: var(--accent-1);">📧 Email</strong>
+                        <p><a href="mailto:hello@cephleau.com" style="color: var(--text-primary); text-decoration: none;">hello@cephleau.com</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <strong style="color: var(--accent-1);">📍 Location</strong>
+                        <p>Denver, Colorado</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong style="color: var(--accent-1);">⏱️ Response</strong>
+                        <p>Within one business day</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company *</label>
+                            <input type="text" id="company" name="company" placeholder="Your organization" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="challenge">Operational Challenge *</label>
+                            <textarea id="challenge" name="challenge" placeholder="Tell us your biggest operational challenge..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Request →</button>
+                        <p style="color: var(--text-tertiary); font-size: 0.8rem; text-align: center; margin-top: 1rem;">We don't spam. Your data is secure.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p style="margin-bottom: 0.5rem;">© 2026 Cephleau Consulting. All rights reserved.</p>
+        <p>Industrial Operations Optimization • Aerospace • Manufacturing • Supply Chain</p>
+    </footer>
+
+    <script>
+        // Smooth navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you! We\'ll be in touch within one business day.');
+            e.target.reset();
+        });
+
+        // Button ripple effect
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.5);
+                    left: ${x}px;
+                    top: ${y}px;
+                    pointer-events: none;
+                    animation: ripple-effect 0.6s ease-out;
+                `;
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-effect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

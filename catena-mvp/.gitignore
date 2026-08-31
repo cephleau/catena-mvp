@@ -78,3 +78,5 @@ ENV/
 .AppleDouble
 .AppleDB
 *.localized
+.vercel
+.worktrees/
