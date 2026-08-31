@@ -7,7 +7,7 @@
 
 ## Overview
 
-Build a production-grade Next.js landing page for Catena Language Partners based on the approved prototype. The page showcases medical interpretation services, guides visitors through the value proposition, and provides three primary call-to-action modals: Request Interpreter, Schedule Demo, and Log In.
+Build a production-grade Next.js landing page for Catena Language Partners based on the approved prototype. The page showcases medical interpretation services, guides visitors through the value proposition, and provides two primary call-to-action modals: Request Interpreter and Schedule Demo.
 
 **Scope:** Single-page landing page with modal-driven interactions.  
 **Tech Stack:** Next.js, React, CSS Modules, TypeScript  
@@ -47,9 +47,8 @@ All images will be optimized using Next.js `Image` component for performance.
     - For Interpreters → dropdown menu (TBD)
     - About → `#about`
     - Resources → dropdown menu (TBD)
-  - Two buttons:
-    - "Log In" → opens Log In modal
-    - "Request an Interpreter" → opens Request Interpreter modal
+  - One button:
+    - "Request an Interpreter" → opens Request Interpreter modal (primary CTA)
 - **Styling:** Fixed header, white background, subtle border-bottom
 
 #### 2. Hero Section
@@ -141,11 +140,11 @@ All images will be optimized using Next.js `Image` component for performance.
 ## Modal Architecture
 
 ### Modal Management
-- **State:** Single `modalState` (React hook) tracks which modal is open: `null | 'request' | 'demo' | 'login'`
+- **State:** Single `modalState` (React hook) tracks which modal is open: `null | 'request' | 'demo'`
 - **Overlay:** Dark semi-transparent background, click-to-close
 - **Animation:** Fade-in/out for modals
 
-### Modal 1: Request Interpreter
+### Modal 1: Request Interpreter (Primary CTA)
 **Purpose:** Capture initial interpretation request  
 **Fields:**
 - Appointment type (radio: Video, Phone, Scheduled)
@@ -160,7 +159,7 @@ All images will be optimized using Next.js `Image` component for performance.
 **Submit:** POST to `/api/requests` (placeholder)  
 **Response:** Success message with confirmation ID, close modal after 2s
 
-### Modal 2: Schedule Demo
+### Modal 2: Schedule Demo (Secondary CTA)
 **Purpose:** Book a product walkthrough  
 **Fields:**
 - Company/facility name (text)
@@ -174,17 +173,6 @@ All images will be optimized using Next.js `Image` component for performance.
 
 **Submit:** POST to `/api/demos` (placeholder)  
 **Response:** Success message, close modal after 2s
-
-### Modal 3: Log In
-**Purpose:** Authenticate existing users  
-**Fields:**
-- Email (email input)
-- Password (password input)
-- Remember me (checkbox)
-- Forgot password link
-
-**Submit:** POST to `/api/auth/login` (placeholder)  
-**Response:** Success message or error handling for failed auth
 
 ---
 
@@ -283,10 +271,6 @@ All images will be optimized using Next.js `Image` component for performance.
 2. **POST `/api/demos`** — Schedule Demo form submission
    - Expected request body: `{ companyName, name, email, phone, preferredDateTime, teamSize, questions }`
    - Expected response: `{ success: boolean, confirmationId: string, message: string }`
-
-3. **POST `/api/auth/login`** — Log In form submission
-   - Expected request body: `{ email, password, rememberMe }`
-   - Expected response: `{ success: boolean, token?: string, message: string }`
 
 All endpoints will be documented in code comments for easy swapping.
 
