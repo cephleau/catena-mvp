@@ -1,6 +1,19 @@
-/* Catena Landing Page Styles */
+/* Catena Landing Page Styles - Complete */
 
-/* Warp Float Animations */
+/* ============ RESET & GLOBALS ============ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============ ANIMATIONS ============ */
+
 @keyframes warpFloat1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(40px, 30px) scale(1.08); }
@@ -15,6 +28,14 @@
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(25px, -30px) scale(0.95); }
 }
+
+/* ============ LAYOUT ============ */
+
+.container {
+  width: 100%;
+}
+
+/* ============ WARP BLOBS ============ */
 
 .warpBlob {
   position: absolute;
@@ -63,41 +84,7 @@
   animation: warpFloat2 20s ease-in-out infinite reverse;
 }
 
-.container {
-}
-
-.header {
-}
-
-.hero {
-}
-
-.challenge {
-}
-
-.howCatenaHelps {
-}
-
-.complianceBand {
-}
-
-.howItWorks {
-}
-
-.deliveryModes {
-}
-
-.finalCta {
-}
-
-.footer {
-}
-
-.modal {
-}
-
-.modalOverlay {
-}
+/* ============ HEADER ============ */
 
 .header {
   display: flex;
@@ -178,6 +165,7 @@
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.3s ease;
+  font-family: inherit;
 }
 
 .ctaButton:hover {
@@ -198,7 +186,8 @@
   }
 }
 
-/* Hero Section Styles */
+/* ============ HERO SECTION ============ */
+
 .hero {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -359,19 +348,825 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
+/* ============ CHALLENGE SECTION ============ */
+
+.challenge {
+  display: grid;
+  grid-template-columns: 1fr 0.92fr;
+  gap: 64px;
+  padding: 104px 64px;
+  align-items: center;
 }
 
-.container {
-  width: 100%;
+.challengeContent {
+  display: contents;
 }
 
-@media (max-width: 640px) {
-  .container {
-    width: 100%;
+.challengeText {
+  max-width: 500px;
+}
+
+.sectionLabel {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: #2E9E8E;
+  margin-bottom: 16px;
+}
+
+.sectionHeading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 33px;
+  line-height: 1.22;
+  color: #122C4D;
+  font-weight: 700;
+  max-width: 420px;
+  margin: 0;
+}
+
+.sectionBody {
+  margin-top: 20px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: #5B6472;
+  max-width: 460px;
+}
+
+.painPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.painPoint {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #33404F;
+}
+
+.painPointIcon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 10px;
+  background: #FBEAE7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.challengeImage {
+  position: relative;
+  height: 380px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #E8EBF1;
+}
+
+.challengeImg {
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .challenge {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 80px 32px;
   }
 
+  .challengeImage {
+    height: 250px;
+  }
+}
+
+/* ============ HOW CATENA HELPS (FEATURES) ============ */
+
+.howCatenaHelps {
+  padding: 96px 64px;
+  background: #FAFBFD;
+}
+
+.centerSection {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 52px auto;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.featureCard {
+  background: #FFFFFF;
+  border: 1px solid #E8EBF1;
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+
+.featureIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(46, 158, 142, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.featureTitle {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #122C4D;
+  margin-bottom: 8px;
+}
+
+.featureDesc {
+  font-size: 13.5px;
+  color: #5B6472;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .howCatenaHelps {
+    padding: 80px 32px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ COMPLIANCE BAND ============ */
+
+.complianceBand {
+  background: #122C4D;
+  padding: 52px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.complianceBandContent {
+  display: contents;
+}
+
+.complianceBandHeading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 21px;
+  color: #FFFFFF;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  max-width: 340px;
+}
+
+.complianceBandText {
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: #AEBBCE;
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.trustBadges {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .complianceBand {
+    padding: 40px 32px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .trustBadges {
+    justify-content: center;
+  }
+}
+
+/* ============ HOW IT WORKS ============ */
+
+.howItWorks {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 64px 96px 64px;
+  background: hsl(200, 100%, 20%);
+}
+
+.howItWorksContent {
+  position: relative;
+  display: contents;
+}
+
+.howItWorksSection {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stepsContainer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 64px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 22%;
+  position: relative;
+}
+
+.stepCircle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 12px 26px -14px rgba(0, 0, 0, 0.5);
+}
+
+.stepNumber {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #122C4D;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepName {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.stepDesc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  line-height: 1.55;
+}
+
+@media (max-width: 768px) {
+  .howItWorks {
+    padding: 80px 32px;
+  }
+
+  .stepsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+/* ============ DELIVERY MODES ============ */
+
+.deliveryModes {
+  padding: 96px 64px;
+  background: #FAFBFD;
+}
+
+.deliveryModesContent {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.deliveryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.deliveryCard {
+  background: #FFFFFF;
+  border: 1px solid #E8EBF1;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.deliveryCard:hover {
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.deliveryCardImageBg {
+  height: 150px;
+  background: rgba(46, 158, 142, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deliveryCardBody {
+  padding: 24px;
+}
+
+.deliveryTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #122C4D;
+  margin-bottom: 8px;
+}
+
+.deliveryDesc {
+  font-size: 13.5px;
+  color: #5B6472;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.learnMoreLink {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #2E9E8E;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.learnMoreLink:hover {
+  color: #1d7563;
+}
+
+@media (max-width: 1024px) {
+  .deliveryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .deliveryModes {
+    padding: 80px 32px;
+  }
+
+  .deliveryGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ FINAL CTA ============ */
+
+.finalCta {
+  margin: 0 64px 64px 64px;
+  background: linear-gradient(120deg, #122C4D, #1E3E68);
+  border-radius: 24px;
+  padding: 56px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.finalCtaContent {
+  display: contents;
+}
+
+.finalCtaHeading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px;
+  color: #FFFFFF;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  max-width: 460px;
+}
+
+.finalCtaText {
+  margin-top: 10px;
+  font-size: 14.5px;
+  color: #B9C4D6;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.finalCtaButtons {
+  display: flex;
+  gap: 14px;
+}
+
+.ctaButton.tertiary {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 26px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaButton.tertiary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .finalCta {
+    margin: 0 32px 32px 32px;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 32px;
+  }
+
+  .finalCtaButtons {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}
+
+/* ============ FOOTER ============ */
+
+.footer {
+  background: #F2F5F9;
+  padding: 56px 64px 32px 64px;
+  border-top: 1px solid #E8EBF1;
+}
+
+.footerContent {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLogoBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerLogoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.footerLogoBrand {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #122C4D;
+}
+
+.footerLogoSubtext {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #2E9E8E;
+}
+
+.footerTagline {
+  font-size: 12.5px;
+  font-style: italic;
+  color: #7C8794;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.footerDescription {
+  font-size: 13px;
+  color: #6B7482;
+  line-height: 1.65;
+  max-width: 230px;
+  margin: 0 0 16px 0;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 10px;
+}
+
+.socialIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #DCE2EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.socialIcon:hover {
+  background: #122C4D;
+}
+
+.socialIcon:hover svg {
+  color: #FFFFFF;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerColumnHeading {
+  font-size: 13px;
+  font-weight: 700;
+  color: #122C4D;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-size: 13.5px;
+  color: #5B6472;
+}
+
+.footerLinks a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLinks a:hover {
+  color: #2E9E8E;
+}
+
+.footerBottom {
+  border-top: 1px solid #E1E6EE;
+  padding-top: 22px;
+  text-align: center;
+  font-size: 12.5px;
+  color: #8892A0;
+}
+
+.footerBottom p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 32px 24px 32px;
+  }
+
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ============ MODALS ============ */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  z-index: 1001;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  margin-bottom: 24px;
+}
+
+.modalTitle {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #122C4D;
+  margin: 0 0 8px 0;
+}
+
+.modalSubtitle {
+  font-size: 14px;
+  color: #5B6472;
+  margin: 0;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #122C4D;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  padding: 12px 14px;
+  border: 1.5px solid #E8EBF1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #2E9E8E;
+  box-shadow: 0 0 0 3px rgba(46, 158, 142, 0.1);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.formCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #5B6472;
+}
+
+.formCheckbox input {
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.modalButton {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.modalButton.submit {
+  background: #122C4D;
+  color: #FFFFFF;
+}
+
+.modalButton.submit:hover:not(:disabled) {
+  background: #0d1a34;
+}
+
+.modalButton.submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.modalButton.cancel {
+  background: #F5F5F5;
+  color: #122C4D;
+  border: 1.5px solid #E8EBF1;
+}
+
+.modalButton.cancel:hover {
+  background: #EFEFEF;
+}
+
+.submitMessage {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.submitMessage.success {
+  background: #e6f9f5;
+  color: #0d7c5c;
+  border: 1px solid #a8dfd0;
+}
+
+.submitMessage.error {
+  background: #fde6e6;
+  color: #8b2e2e;
+  border: 1px solid #f0aaaa;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    padding: 32px 24px;
+  }
+
+  .modalTitle {
+    font-size: 24px;
+  }
+
+  .modalButtons {
+    flex-direction: column;
+  }
+
+  .modalButton {
+    width: 100%;
+  }
+}
+
+/* ============ MOBILE RESPONSIVE ============ */
+
+@media (max-width: 640px) {
   .header {
     padding: 12px 16px;
   }
@@ -380,25 +1175,8 @@ html {
     gap: 12px;
   }
 
-  .logo {
-    min-width: auto;
-  }
-
-  .logoBrand {
-    font-size: 16px;
-  }
-
   .logoSubtext {
     font-size: 8px;
-  }
-
-  .nav {
-    display: none;
-  }
-
-  .ctaButton {
-    padding: 8px 16px;
-    font-size: 13px;
   }
 
   .hero {
@@ -430,7 +1208,8 @@ html {
     gap: 12px;
   }
 
-  .ctaButton.primary, .ctaButton.secondary {
+  .ctaButton.primary,
+  .ctaButton.secondary {
     width: 100%;
     padding: 12px 20px;
   }
@@ -439,18 +1218,8 @@ html {
     height: 280px;
   }
 
-  .challenge {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 60px 16px;
-  }
-
   .sectionHeading {
     font-size: 24px;
-  }
-
-  .challengeImage {
-    height: 200px;
   }
 
   .howCatenaHelps {
@@ -462,31 +1231,12 @@ html {
     gap: 16px;
   }
 
-  .featureCard {
-    padding: 20px 16px;
-  }
-
   .complianceBand {
     padding: 32px 16px;
   }
 
   .howItWorks {
     padding: 60px 16px;
-  }
-
-  .warpBlob {
-    display: none;
-  }
-
-  .stepsContainer {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .step {
-    width: 100%;
-    max-width: 100%;
   }
 
   .deliveryModes {
@@ -511,11 +1261,6 @@ html {
     padding: 32px 16px 16px 16px;
   }
 
-  .footerTop {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
   .modal {
     width: 95%;
     padding: 24px 16px;
@@ -523,13 +1268,5 @@ html {
 
   .modalTitle {
     font-size: 20px;
-  }
-
-  .modalButtons {
-    flex-direction: column;
-  }
-
-  .modalButton {
-    width: 100%;
   }
 }

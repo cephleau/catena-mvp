@@ -1,8 +1,11 @@
 "use client"
 
 import React from 'react';
+import Image from 'next/image';
+import { CheckCircle } from 'lucide-react';
 import { CleanHero } from '@/components/ui/clean-hero';
 import { CatenaCTASection } from '@/components/ui/catena-cta-section';
+import styles from './page.module.css';
 
 
 const navLinks = [
@@ -83,6 +86,57 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Challenge Section */}
+      <section className={styles.challenge}>
+        <div className={styles.challengeContent}>
+          <div className={styles.challengeText}>
+            <div className={styles.sectionLabel}>THE CHALLENGE</div>
+            <h2 className={styles.sectionHeading}>Language barriers shouldn't delay care.</h2>
+            <p className={styles.sectionBody}>
+              When communication breaks down, healthcare teams lose valuable time and patients can leave without fully understanding their care. Catena helps bridge that gap by connecting healthcare providers with professional medical interpreters when communication matters most.
+            </p>
+
+            <div className={styles.painPoints}>
+              <div className={styles.painPoint}>
+                <div className={styles.painPointIcon}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C24A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="13" r="8.2"/><path d="M12 9v4l2.6 1.6"/><path d="M9 2h6"/>
+                  </svg>
+                </div>
+                <span>Interpreter unavailable</span>
+              </div>
+
+              <div className={styles.painPoint}>
+                <div className={styles.painPointIcon}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C24A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3.5" y="4.5" width="17" height="16" rx="2.4"/><path d="M3.5 9.5h17"/><path d="M9 14l6 5M15 14l-6 5"/>
+                  </svg>
+                </div>
+                <span>Long scheduling delays</span>
+              </div>
+
+              <div className={styles.painPoint}>
+                <div className={styles.painPointIcon}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C24A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M12.2 8.4v3.4l2 1.4"/><path d="M18.5 2.5v4h-4"/>
+                  </svg>
+                </div>
+                <span>Difficulty communicating medical information</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.challengeImage}>
+            <Image
+              src="/images/challenge-illustration.jpg"
+              alt="Providers and patients connecting through video and in-person interpretation"
+              fill
+              className={styles.challengeImg}
+            />
           </div>
         </div>
       </section>
