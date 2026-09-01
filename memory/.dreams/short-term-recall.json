@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-14T03:50:36.019Z",
+  "updatedAt": "2026-09-01T02:30:33.562Z",
   "entries": {
     "memory:memory/2026-04-12.md:1:53": {
       "key": "memory:memory/2026-04-12.md:1:53",
@@ -73,18 +73,20 @@
       "endLine": 28,
       "source": "memory",
       "snippet": "# Session Notes - April 5, 2026 ## Catena Site Deployment Issue **Problem:** catenalanguagepartners.com was down. **Root Cause:** Netlify free tier credits exhausted. Site cannot deploy until billing is added. **Solution Attempted:** Deploy to Vercel instead (free alternative). **Status:** In progress - Catena MVP code is in `/Users/cephleau/.openclaw/workspace/catena-mvp` - GitHub repo created: `https://github.com/cephleau/catena-language-solutions` - Code needs to be pushed to GitHub (token auth failed multiple times) - Vercel import process started but Carlos having UI navigation difficulty **Next Steps:** 1. Push catena-mvp code to GitHub repo (may need fresh PAT or SSH key setup)",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.6715880292060309,
+      "totalScore": 1.087012643502575,
       "maxScore": 0.6715880292060309,
       "firstRecalledAt": "2026-04-14T03:50:36.019Z",
-      "lastRecalledAt": "2026-04-14T03:50:36.019Z",
+      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
       "queryHashes": [
-        "a6490a3c14c2"
+        "a6490a3c14c2",
+        "6a5bc149e2eb"
       ],
       "recallDays": [
-        "2026-04-13"
+        "2026-04-13",
+        "2026-08-31"
       ],
       "conceptTags": [
         "catenalanguagepartners.com",
@@ -95,6 +97,347 @@
         "catena",
         "site",
         "deployment"
+      ]
+    },
+    "memory:memory/2026-04-07.md:73:120": {
+      "key": "memory:memory/2026-04-07.md:73:120",
+      "path": "memory/2026-04-07.md",
+      "startLine": 73,
+      "endLine": 120,
+      "source": "memory",
+      "snippet": "- framer-motion: Animation library - clsx: Conditional classes - tailwind-merge: Merge Tailwind - @radix-ui/react-slot: UI primitive - class-variance-authority: Component variants ### Current Issues **BackgroundPaths Background Color:** - Current: Black (#000000 or very dark) - Target: Navy (#0a0f1f or #0f1a2e) to match rest of site - Attempted fix: gradient-to-b from primary-dark to primary - Status: Need to verify CSS is applying correctly ### Next Steps 1. **Fix BackgroundPaths background** to use site's navy color scheme 2. **Optional: Add Lucide React icons** for professional service icons 3. **Deploy to Netlify** (repo is ready, just need to connect) 4. **Test responsiveness** acro",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6481519357020193,
+      "maxScore": 0.6481519357020193,
+      "firstRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "queryHashes": [
+        "f1cd3ccbe4ae"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "framer-motion",
+        "tailwind-merge",
+        "radix-ui/react-slot",
+        "class-variance-authority",
+        "gradient-to-b",
+        "primary-dark",
+        "framer",
+        "motion"
+      ]
+    },
+    "memory:memory/2026-04-07.md:36:83": {
+      "key": "memory:memory/2026-04-07.md:36:83",
+      "path": "memory/2026-04-07.md",
+      "startLine": 36,
+      "endLine": 83,
+      "source": "memory",
+      "snippet": "- **InteractiveOctopus** (mouse-tracking, click animation, sparkles) - Staggered text animations with spring physics - Stat cards with hover effects #### 6. 21st.dev Magic Components Integrated **FallingPattern:** - Orange particles falling continuously - 120-second animation duration - Backdrop blur for depth - Dark overlay ensures text readability **BackgroundPaths:** - Green animated flowing lines (36 SVG paths) - Letter-by-letter text animation - \"Discover Excellence\" button scrolls to Contact form - Button positioned at bottom (removed duplicate) - **TODO:** Fix background color to match navy site theme **InteractiveOctopus:** - Mouse tracking: rotates toward cursor - Click animatio",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6478104159880501,
+      "maxScore": 0.6478104159880501,
+      "firstRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "queryHashes": [
+        "f1cd3ccbe4ae"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "mouse-tracking",
+        "21st.dev",
+        "120-second",
+        "letter-by-letter",
+        "interactiveoctopus",
+        "mouse",
+        "tracking",
+        "click"
+      ]
+    },
+    "memory:memory/2026-03-28.md:22:52": {
+      "key": "memory:memory/2026-03-28.md:22:52",
+      "path": "memory/2026-03-28.md",
+      "startLine": 22,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "**File:** `/Users/cephleau/.openclaw/workspace/kanban.html` - 40 tasks pre-loaded (Tech, Business, Ops, Marketing, Planning) - Drag-drop between columns (To Do → In Progress → Done) - Auto-updates progress % and task counts - Color-coded by priority (Critical 🔴, High 🟠, Medium 🔵, Low 🟢) - Status: 18% complete (7 planning tasks done, 33 remaining) ### Pricing Model Locked - **Client rate:** $75/hour (minimum 1 hour) - **Interpreter pay:** $45/hour (60% of client rate) - **Gross margin:** 31.7% per job - **Fixed costs:** ~$450/month (hosting, legal, insurance) - **Break-even:** 19 jobs/month ### Business Model Highlights - **Revenue streams:** Live interpretation ($75/hr), telehealth ($8",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6063782805405407,
+      "maxScore": 0.6063782805405407,
+      "firstRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "queryHashes": [
+        "f1cd3ccbe4ae"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "users/cephleau",
+        "openclaw/workspace/kanban.html",
+        "pre-loaded",
+        "drag-drop",
+        "auto-updates",
+        "color-coded",
+        "75/hour",
+        "45/hour"
+      ]
+    },
+    "memory:memory/2026-03-28.md:1:29": {
+      "key": "memory:memory/2026-03-28.md:1:29",
+      "path": "memory/2026-03-28.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# Session Log: 2026-03-28 (Saturday) ## CatenaLP LLC — MVP Launch Setup Complete ### Domain Status - **cephleau.com**: DNS propagating via Cloudflare, should verify within 1-2 hours - **catenalanguagepartners.com**: Registered on Network Solutions; nameservers need update - IPs obtained: kyree (172.64.35.207), sasha (162.159.38.69) - Alternative: Use catenalanguagepartners.netlify.app for MVP launch, update custom domain later - Network Solutions support: 1-888-642-9675 (24/7) ### Folder Structure Created **Location:** `/Users/cephleau/.openclaw/workspace/CatenaLP_LLC/` - `docs/BUSINESS_MODEL.md` — Revenue streams, cost structure, KPIs, 12-month roadmap - `docs/RACI_MATRIX.md` — Who",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6032002776527812,
+      "maxScore": 0.6032002776527812,
+      "firstRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "queryHashes": [
+        "f1cd3ccbe4ae"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "network",
+        "cephleau.com",
+        "1-2",
+        "catenalanguagepartners.com",
+        "172.64.35.207",
+        "162.159.38.69",
+        "1-888-642-9675",
+        "24/7"
+      ]
+    },
+    "memory:memory/2026-03-28.md:72:88": {
+      "key": "memory:memory/2026-03-28.md:72:88",
+      "path": "memory/2026-03-28.md",
+      "startLine": 72,
+      "endLine": 88,
+      "source": "memory",
+      "snippet": "1. **Confirm domain** (catenalanguagepartners.com nameservers or approve netlify.app MVP launch) 2. **Sub-agent builds frontend** (landing, auth, booking flow) 3. **Carlos:** Stripe setup, clinic list building, outreach prep 4. **Cousin:** Interpreter recruiting (3-5 bilingual medical professionals), HIPAA training setup 5. **Weekly kanban updates** (drag tasks as progress happens) ### Files Created - KANBAN_BOARD.md (markdown version, redundant with HTML) - kanban.html (interactive task board) - All docs in CatenaLP_LLC folder --- **Session Owner:** Carlos Cadena **Facilitator:** Octo 🐙 **Work Status:** ~30 hours of planning/documentation completed in one session",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5930174395365883,
+      "maxScore": 0.5930174395365883,
+      "firstRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "queryHashes": [
+        "f1cd3ccbe4ae"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "catenalanguagepartners.com",
+        "netlify.app",
+        "sub-agent",
+        "3-5",
+        "kanban-board.md",
+        "kanban.html",
+        "catenalp-llc",
+        "planning/documentation"
+      ]
+    },
+    "memory:memory/2026-04-19.md:26:62": {
+      "key": "memory:memory/2026-04-19.md:26:62",
+      "path": "memory/2026-04-19.md",
+      "startLine": 26,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "- `CleanHero` - Fixed header, centered hero, entrance animations, responsive - `CatenaCTASection` - Animated background mesh (teal/blue, low opacity), premium CTA buttons #### 4. **Deployment Process** - Initially pushed to wrong repo (`cephleau-site.git`) - Discovered Netlify was connected to `catena-language-solutions.git` - Corrected course and pushed to correct repo - Code committed: 61ac53f (redesign) + 5d4b458 (CTA section) - Deployment triggered but encountered npm install failure in Netlify build #### 5. **Documentation Created** - CATENA-REDESIGN-SUMMARY.md - Comprehensive overview - CATENA-CHANGES-DETAILED.md - Technical breakdown - CATENA-FILES-CHANGED.md - File-by-file changes",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5706844437442382,
+      "maxScore": 0.5706844437442382,
+      "firstRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "queryHashes": [
+        "f1cd3ccbe4ae"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "teal/blue",
+        "cephleau-site.git",
+        "catena-language-solutions.git",
+        "catena-redesign-summary.md",
+        "catena-changes-detailed.md",
+        "catena-files-changed.md",
+        "file-by-file",
+        "cleanhero"
+      ]
+    },
+    "memory:memory/2026-04-13.md:1:33": {
+      "key": "memory:memory/2026-04-13.md:1:33",
+      "path": "memory/2026-04-13.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# 2026-04-13 - Catena Website Deployment ## Session Summary Carlos requested help deploying the Catena Language Solutions website. Successfully deployed a production landing page to Netlify. ## What Was Done 1. **Reviewed existing assets**: Found catena-landing.html (static) and catena-mvp (Next.js project) 2. **Created professional landing page** with: - Hero section: \"Medical Interpretation, On Demand\" - 6 feature cards (instant connection, HIPAA compliance, 24/7, quality assured, flexible scheduling, transparent pricing) - How It Works (4-step process) - Dual pricing tiers: $75/hr for providers, $45/hr for interpreters - Stats showcase (500+ interpreters, 10K+ appointment",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7367614262954817,
+      "maxScore": 0.7367614262954817,
+      "firstRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "queryHashes": [
+        "6a5bc149e2eb"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "catena-landing.html",
+        "catena-mvp",
+        "next.js",
+        "24/7",
+        "4-step",
+        "75/hr",
+        "45/hr",
+        "catena"
+      ]
+    },
+    "memory:memory/2026-04-12.md:83:129": {
+      "key": "memory:memory/2026-04-12.md:83:129",
+      "path": "memory/2026-04-12.md",
+      "startLine": 83,
+      "endLine": 129,
+      "source": "memory",
+      "snippet": "- Use HTML/CSS approach or deploy to Netlify from existing Next.js code - Fix CSS compilation issue directly - Get site live ASAP ### Next Action Build production-ready Catena site using method that gets it deployed today. ### Key Learnings - Next.js Tailwind CSS setup was broken (CSS not compiling) - Manual Framer editing is too slow for iteration - Need to focus on **deployment** not perfection - Carlos wants speed over process --- ## Session: Cephleau Consulting Site Deploy + Avatar Update **Time:** 22:03–22:07 MDT **Status:** Deployed cephleau.com, working on octopus avatar replacement ### Work Done 1. **Deployed cephleau.com to Netlify** - Found uncommitted changes in `/ceph",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.44050468792619624,
+      "maxScore": 0.44050468792619624,
+      "firstRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "queryHashes": [
+        "6a5bc149e2eb"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "html/css",
+        "next.js",
+        "production-ready",
+        "cephleau.com",
+        "use",
+        "html",
+        "css",
+        "approach"
+      ]
+    },
+    "memory:memory/2026-03-29.md:28:45": {
+      "key": "memory:memory/2026-03-29.md:28:45",
+      "path": "memory/2026-03-29.md",
+      "startLine": 28,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "### Critical Issue - Placeholder Supabase/Stripe keys will cause API routes to fail at runtime - Options: (a) Use real keys, (b) Mock API responses, (c) Deploy frontend separately, (d) Stub out API endpoints - Recommend: Stub API responses locally for demo, require real keys before Phase 3 production launch ### Next Steps 1. **Get build live** — Disable strict checks, deploy to catenalanguagepartners.netlify.app with white logo 2. **Stub API responses** — Mock Supabase/Stripe for demo purposes (booking confirms, dashboard loads) 3. **Phase 3** — Real-time matching, email notifications, Stripe integration (needs real keys) 4. **Real Credentials** — Before Phase 4, need actual Supabase projec",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43063983933567096,
+      "maxScore": 0.43063983933567096,
+      "firstRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "queryHashes": [
+        "6a5bc149e2eb"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "supabase/stripe",
+        "real-time",
+        "critical",
+        "issue",
+        "placeholder",
+        "supabase",
+        "stripe",
+        "keys"
+      ]
+    },
+    "memory:memory/2026-05-26.md:1:19": {
+      "key": "memory:memory/2026-05-26.md:1:19",
+      "path": "memory/2026-05-26.md",
+      "startLine": 1,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "# Daily Notes — 2026-05-26 ## Session Summary - **Time:** Tue 20:30-20:33 MDT - **Task:** Catena website edits via Control UI ## Work Completed 1. **Logo resize** — Increased header logo size from `sm` to `lg` in `clean-hero.tsx` (~500% bigger as requested) 2. **Removed stats section** — Deleted the section displaying 500+ interpreters, 10K+ appointments, 98% satisfaction metrics from `app/page.tsx` ## Files Modified - `/Users/cephleau/.openclaw/workspace/catena-mvp/components/ui/clean-hero.tsx` - `/Users/cephleau/.openclaw/workspace/catena-mvp/app/page.tsx` ## Status - Changes committed - Live on catenalanguagepartners.com (Netlify auto-deploy) - No further action needed unless Carlos r",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3561446555005178,
+      "maxScore": 0.3561446555005178,
+      "firstRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "queryHashes": [
+        "6a5bc149e2eb"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "30-20",
+        "clean-hero.tsx",
+        "app/page.tsx",
+        "users/cephleau",
+        "catenalanguagepartners.com",
+        "auto-deploy",
+        "summary",
+        "time"
+      ]
+    },
+    "memory:memory/2026-04-13.md:26:61": {
+      "key": "memory:memory/2026-04-13.md:26:61",
+      "path": "memory/2026-04-13.md",
+      "startLine": 26,
+      "endLine": 61,
+      "source": "memory",
+      "snippet": "- Used netlify token: nfp_moauH76jQKSENL5rUdUwPKataAtzbxuRed71 - Deployment successful at 21:49 MDT (Apr 13) ## Key Details - **Project location**: `/Users/cephleau/.openclaw/workspace/catena-mvp/` - **Landing page**: `/public/index.html` (27KB) - **Images folder**: `/public/images/` (SVG assets) - **Site ID**: stellular-crisp-cb1d6a (from Netlify) - **Domain**: catenalanguagepartners.com (configured in Netlify) ## Carlos's Images Received Sent 5 images: 1. Catena logo (teal on dark blue background) 2. Catena logo with \"LANGUAGE PARTNERS\" tagline (light background) 3. Catena logo on teal background 4. Global medical interpretation illustration (doctor + patient with language flags) 5",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8485743901815737,
+      "maxScore": 0.8485743901815737,
+      "firstRecalledAt": "2026-09-01T02:30:33.562Z",
+      "lastRecalledAt": "2026-09-01T02:30:33.562Z",
+      "queryHashes": [
+        "e8d921a06b37"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "users/cephleau",
+        "openclaw/workspace/catena-mvp",
+        "public/index.html",
+        "public/images",
+        "stellular-crisp-cb1d6a",
+        "catenalanguagepartners.com",
+        "used",
+        "netlify"
       ]
     }
   }
