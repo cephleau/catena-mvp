@@ -2,3 +2,4 @@
 .netlify
 .next/
 !.next/public/
+.env.local
