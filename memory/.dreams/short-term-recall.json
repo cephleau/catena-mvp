@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T02:45:52.526Z",
+  "updatedAt": "2026-09-01T03:36:46.132Z",
   "entries": {
     "memory:memory/2026-04-12.md:1:53": {
       "key": "memory:memory/2026-04-12.md:1:53",
@@ -263,16 +263,17 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "- `CleanHero` - Fixed header, centered hero, entrance animations, responsive - `CatenaCTASection` - Animated background mesh (teal/blue, low opacity), premium CTA buttons #### 4. **Deployment Process** - Initially pushed to wrong repo (`cephleau-site.git`) - Discovered Netlify was connected to `catena-language-solutions.git` - Corrected course and pushed to correct repo - Code committed: 61ac53f (redesign) + 5d4b458 (CTA section) - Deployment triggered but encountered npm install failure in Netlify build #### 5. **Documentation Created** - CATENA-REDESIGN-SUMMARY.md - Comprehensive overview - CATENA-CHANGES-DETAILED.md - Technical breakdown - CATENA-FILES-CHANGED.md - File-by-file changes",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.9827493026686247,
-      "maxScore": 0.5706844437442382,
+      "totalScore": 1.672713564801175,
+      "maxScore": 0.6899642621325505,
       "firstRecalledAt": "2026-09-01T02:14:16.456Z",
-      "lastRecalledAt": "2026-09-01T02:45:52.526Z",
+      "lastRecalledAt": "2026-09-01T03:36:46.132Z",
       "queryHashes": [
         "f1cd3ccbe4ae",
-        "e3e332ade5fd"
+        "e3e332ade5fd",
+        "06e2d6764ac7"
       ],
       "recallDays": [
         "2026-08-31"
@@ -295,15 +296,16 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "# 2026-04-13 - Catena Website Deployment ## Session Summary Carlos requested help deploying the Catena Language Solutions website. Successfully deployed a production landing page to Netlify. ## What Was Done 1. **Reviewed existing assets**: Found catena-landing.html (static) and catena-mvp (Next.js project) 2. **Created professional landing page** with: - Hero section: \"Medical Interpretation, On Demand\" - 6 feature cards (instant connection, HIPAA compliance, 24/7, quality assured, flexible scheduling, transparent pricing) - How It Works (4-step process) - Dual pricing tiers: $75/hr for providers, $45/hr for interpreters - Stats showcase (500+ interpreters, 10K+ appointment",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7367614262954817,
+      "totalScore": 1.4295123263349065,
       "maxScore": 0.7367614262954817,
       "firstRecalledAt": "2026-09-01T02:18:23.639Z",
-      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T03:36:46.132Z",
       "queryHashes": [
-        "6a5bc149e2eb"
+        "6a5bc149e2eb",
+        "06e2d6764ac7"
       ],
       "recallDays": [
         "2026-08-31"
@@ -357,15 +359,17 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "### Critical Issue - Placeholder Supabase/Stripe keys will cause API routes to fail at runtime - Options: (a) Use real keys, (b) Mock API responses, (c) Deploy frontend separately, (d) Stub out API endpoints - Recommend: Stub API responses locally for demo, require real keys before Phase 3 production launch ### Next Steps 1. **Get build live** — Disable strict checks, deploy to catenalanguagepartners.netlify.app with white logo 2. **Stub API responses** — Mock Supabase/Stripe for demo purposes (booking confirms, dashboard loads) 3. **Phase 3** — Real-time matching, email notifications, Stripe integration (needs real keys) 4. **Real Credentials** — Before Phase 4, need actual Supabase projec",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.43063983933567096,
-      "maxScore": 0.43063983933567096,
+      "totalScore": 2.054764725136585,
+      "maxScore": 0.944059920529385,
       "firstRecalledAt": "2026-09-01T02:18:23.639Z",
-      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T03:36:46.132Z",
       "queryHashes": [
-        "6a5bc149e2eb"
+        "6a5bc149e2eb",
+        "7839969a7925",
+        "06e2d6764ac7"
       ],
       "recallDays": [
         "2026-08-31"
@@ -472,6 +476,68 @@
         "language",
         "solutions.git",
         "github"
+      ]
+    },
+    "memory:memory/2026-03-29.md:1:33": {
+      "key": "memory:memory/2026-03-29.md:1:33",
+      "path": "memory/2026-03-29.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# Session Log: 2026-03-29 (Sunday) ## Catena MVP Phase 2 Delivery & Deployment Attempt ### Phase 2 Completed (19:26) Sub-agent successfully built: - **Client Booking Form** — multi-step, real-time $75/hr cost calc, Stripe integration - **Interpreter Dashboard** — job management (accept/decline/complete), earnings tracker - **Auth System** — email/password signup + login, role-based routing - **API Routes** — bookings, payments, webhooks with exponential backoff retry - **8 Documentation Guides** — setup, quick start, technical reference - **Full TypeScript Coverage** — strict mode, no `any` types Location: `/Users/cephleau/.openclaw/workspace/catena-mvp/` ### Branding Assets - White logo",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6738268875112454,
+      "maxScore": 0.6738268875112454,
+      "firstRecalledAt": "2026-09-01T03:36:46.132Z",
+      "lastRecalledAt": "2026-09-01T03:36:46.132Z",
+      "queryHashes": [
+        "06e2d6764ac7"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "sub-agent",
+        "multi-step",
+        "real-time",
+        "75/hr",
+        "accept/decline/complete",
+        "email/password",
+        "role-based",
+        "users/cephleau"
+      ]
+    },
+    "memory:memory/2026-04-13.md:54:63": {
+      "key": "memory:memory/2026-04-13.md:54:63",
+      "path": "memory/2026-04-13.md",
+      "startLine": 54,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- Used Netlify drag-and-drop deployment initially, then API authentication - HTML is production-ready, self-contained styling - Smooth scroll anchors implemented for navigation - Intersection Observer for scroll animations - Mobile-first responsive design - All CTA buttons have placeholder alerts (to be replaced with forms) ## Status ✅ **LIVE AND DEPLOYED** - Ready for traffic",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6207363298701383,
+      "maxScore": 0.6207363298701383,
+      "firstRecalledAt": "2026-09-01T03:36:46.132Z",
+      "lastRecalledAt": "2026-09-01T03:36:46.132Z",
+      "queryHashes": [
+        "06e2d6764ac7"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "drag-and-drop",
+        "production-ready",
+        "self-contained",
+        "mobile-first",
+        "used",
+        "netlify",
+        "drag",
+        "drop"
       ]
     }
   }

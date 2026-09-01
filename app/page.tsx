@@ -42,10 +42,13 @@ export default function CatenaLandingPage() {
     setSubmitMessage(null);
 
     try {
-      const response = await fetch('/api/requests', {
+      const response = await fetch('/api/submit-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestFormData),
+        body: JSON.stringify({
+          type: 'request',
+          data: requestFormData,
+        }),
       });
 
       if (response.ok) {
@@ -68,10 +71,13 @@ export default function CatenaLandingPage() {
     setSubmitMessage(null);
 
     try {
-      const response = await fetch('/api/demos', {
+      const response = await fetch('/api/submit-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(demoFormData),
+        body: JSON.stringify({
+          type: 'demo',
+          data: demoFormData,
+        }),
       });
 
       if (response.ok) {
