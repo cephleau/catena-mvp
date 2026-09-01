@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T02:30:33.562Z",
+  "updatedAt": "2026-09-01T02:45:52.526Z",
   "entries": {
     "memory:memory/2026-04-12.md:1:53": {
       "key": "memory:memory/2026-04-12.md:1:53",
@@ -73,16 +73,17 @@
       "endLine": 28,
       "source": "memory",
       "snippet": "# Session Notes - April 5, 2026 ## Catena Site Deployment Issue **Problem:** catenalanguagepartners.com was down. **Root Cause:** Netlify free tier credits exhausted. Site cannot deploy until billing is added. **Solution Attempted:** Deploy to Vercel instead (free alternative). **Status:** In progress - Catena MVP code is in `/Users/cephleau/.openclaw/workspace/catena-mvp` - GitHub repo created: `https://github.com/cephleau/catena-language-solutions` - Code needs to be pushed to GitHub (token auth failed multiple times) - Vercel import process started but Carlos having UI navigation difficulty **Next Steps:** 1. Push catena-mvp code to GitHub repo (may need fresh PAT or SSH key setup)",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.087012643502575,
+      "totalScore": 1.470458356485652,
       "maxScore": 0.6715880292060309,
       "firstRecalledAt": "2026-04-14T03:50:36.019Z",
-      "lastRecalledAt": "2026-09-01T02:18:23.639Z",
+      "lastRecalledAt": "2026-09-01T02:45:52.526Z",
       "queryHashes": [
         "a6490a3c14c2",
-        "6a5bc149e2eb"
+        "6a5bc149e2eb",
+        "e3e332ade5fd"
       ],
       "recallDays": [
         "2026-04-13",
@@ -199,15 +200,16 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# Session Log: 2026-03-28 (Saturday) ## CatenaLP LLC — MVP Launch Setup Complete ### Domain Status - **cephleau.com**: DNS propagating via Cloudflare, should verify within 1-2 hours - **catenalanguagepartners.com**: Registered on Network Solutions; nameservers need update - IPs obtained: kyree (172.64.35.207), sasha (162.159.38.69) - Alternative: Use catenalanguagepartners.netlify.app for MVP launch, update custom domain later - Network Solutions support: 1-888-642-9675 (24/7) ### Folder Structure Created **Location:** `/Users/cephleau/.openclaw/workspace/CatenaLP_LLC/` - `docs/BUSINESS_MODEL.md` — Revenue streams, cost structure, KPIs, 12-month roadmap - `docs/RACI_MATRIX.md` — Who",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.6032002776527812,
-      "maxScore": 0.6032002776527812,
+      "totalScore": 1.3926589540941308,
+      "maxScore": 0.7894586764413495,
       "firstRecalledAt": "2026-09-01T02:14:16.456Z",
-      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:45:52.526Z",
       "queryHashes": [
-        "f1cd3ccbe4ae"
+        "f1cd3ccbe4ae",
+        "e3e332ade5fd"
       ],
       "recallDays": [
         "2026-08-31"
@@ -261,15 +263,16 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "- `CleanHero` - Fixed header, centered hero, entrance animations, responsive - `CatenaCTASection` - Animated background mesh (teal/blue, low opacity), premium CTA buttons #### 4. **Deployment Process** - Initially pushed to wrong repo (`cephleau-site.git`) - Discovered Netlify was connected to `catena-language-solutions.git` - Corrected course and pushed to correct repo - Code committed: 61ac53f (redesign) + 5d4b458 (CTA section) - Deployment triggered but encountered npm install failure in Netlify build #### 5. **Documentation Created** - CATENA-REDESIGN-SUMMARY.md - Comprehensive overview - CATENA-CHANGES-DETAILED.md - Technical breakdown - CATENA-FILES-CHANGED.md - File-by-file changes",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.5706844437442382,
+      "totalScore": 0.9827493026686247,
       "maxScore": 0.5706844437442382,
       "firstRecalledAt": "2026-09-01T02:14:16.456Z",
-      "lastRecalledAt": "2026-09-01T02:14:16.456Z",
+      "lastRecalledAt": "2026-09-01T02:45:52.526Z",
       "queryHashes": [
-        "f1cd3ccbe4ae"
+        "f1cd3ccbe4ae",
+        "e3e332ade5fd"
       ],
       "recallDays": [
         "2026-08-31"
@@ -438,6 +441,37 @@
         "catenalanguagepartners.com",
         "used",
         "netlify"
+      ]
+    },
+    "memory:memory/2026-04-19.md:54:82": {
+      "key": "memory:memory/2026-04-19.md:54:82",
+      "path": "memory/2026-04-19.md",
+      "startLine": 54,
+      "endLine": 82,
+      "source": "memory",
+      "snippet": "- ✅ Code pushed to catena-language-solutions.git on GitHub **Deployment:** - ⚠️ Latest build failed (npm install dependency issue) - ✅ Previous build (Apr 18) still published and live - ⏳ Site currently showing at catena-language-solutions.netlify.app - ❌ Custom domain (catenalanguagepartners.com) NOT yet connected **Next Steps Needed:** 1. Connect custom domain catenalanguagepartners.com in Netlify dashboard 2. Update DNS at domain registrar 3. (Optional) Debug and retry the npm install build failure ### Key Decisions Made - **Theme:** Light background for healthcare trust + professionalism - **Logo:** Subtle placement (header small, hero watermark 8% opacity) - **Shader:** Soft animated",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7321169712559175,
+      "maxScore": 0.7321169712559175,
+      "firstRecalledAt": "2026-09-01T02:45:52.526Z",
+      "lastRecalledAt": "2026-09-01T02:45:52.526Z",
+      "queryHashes": [
+        "e3e332ade5fd"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "catena-language-solutions.git",
+        "catenalanguagepartners.com",
+        "code",
+        "pushed",
+        "catena",
+        "language",
+        "solutions.git",
+        "github"
       ]
     }
   }
