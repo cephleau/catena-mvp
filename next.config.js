@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Ensure public folder is served
   compress: true,
   poweredByHeader: false,
   images: {
-    unoptimized: true, // Disable image optimization for static export
+    unoptimized: true,
+    disableStaticImages: false,
   },
+  // Disable ISR and dynamic routes
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
