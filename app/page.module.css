@@ -168,6 +168,8 @@
 
   .headerContent {
     gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 10px;
   }
 
   .nav {
