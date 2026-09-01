@@ -221,7 +221,53 @@ export default function CatenaLandingPage() {
 
       {/* CHALLENGE */}
       <section className={styles.challenge}>
-        {/* Challenge content goes here */}
+        <div className={styles.challengeContent}>
+          <div className={styles.challengeText}>
+            <div className={styles.sectionLabel}>THE CHALLENGE</div>
+            <h2 className={styles.sectionHeading}>Language barriers shouldn&apos;t delay care.</h2>
+            <p className={styles.sectionBody}>
+              When communication breaks down, healthcare teams lose valuable time and patients can leave without fully understanding their care. Catena helps bridge that gap by connecting healthcare providers with professional medical interpreters when communication matters most.
+            </p>
+
+            <div className={styles.painPoints}>
+              <div className={styles.painPoint}>
+                <div className={styles.painPointIcon}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C24A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="13" r="8.2" /><path d="M12 9v4l2.6 1.6" /><path d="M9 2h6" />
+                  </svg>
+                </div>
+                <span>Interpreter unavailable</span>
+              </div>
+
+              <div className={styles.painPoint}>
+                <div className={styles.painPointIcon}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C24A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3.5" y="4.5" width="17" height="16" rx="2.4" /><path d="M3.5 9.5h17" /><path d="M9 14l6 5M15 14l-6 5" />
+                  </svg>
+                </div>
+                <span>Long scheduling delays</span>
+              </div>
+
+              <div className={styles.painPoint}>
+                <div className={styles.painPointIcon}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C24A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 11.5a8.5 8.5 0 1 1-4-7.2" /><path d="M12.2 8.4v3.4l2 1.4" /><path d="M18.5 2.5v4h-4" />
+                  </svg>
+                </div>
+                <span>Difficulty communicating medical information</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.challengeImage}>
+            <Image
+              src="/images/challenge-illustration.jpg"
+              alt="A healthcare provider and patient connecting through video and in-person interpretation"
+              fill
+              className={styles.challengeImg}
+            />
+          </div>
+        </div>
       </section>
 
       {/* HOW CATENA HELPS */}
@@ -308,7 +354,63 @@ export default function CatenaLandingPage() {
 
       {/* HOW IT WORKS */}
       <section className={styles.howItWorks} id="how-it-works">
-        {/* 4-step process goes here */}
+        <div className={styles.warpBlob + ' ' + styles.wb1}></div>
+        <div className={styles.warpBlob + ' ' + styles.wb2}></div>
+        <div className={styles.warpBlob + ' ' + styles.wb3}></div>
+        <div className={styles.warpBlob + ' ' + styles.wb4}></div>
+
+        <div className={styles.howItWorksContent}>
+          <div className={styles.howItWorksSection}>
+            <div className={styles.sectionLabel}>HOW IT WORKS</div>
+            <h2 className={styles.sectionHeading}>Simple, seamless, professional interpretation.</h2>
+          </div>
+
+          <div className={styles.stepsContainer}>
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4l16 8-16 8 3.5-8L4 4Z" />
+                </svg>
+                <div className={styles.stepNumber}>1</div>
+              </div>
+              <div className={styles.stepName}>Request</div>
+              <div className={styles.stepDesc}>Submit your interpretation request with date, time, and language.</div>
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="9" cy="8" r="3.2" /><path d="M3.5 19v-1.2A4.3 4.3 0 0 1 7.8 13.5h2.4" /><path d="M14.5 9.5l2.2 2.2 4-4.4" />
+                </svg>
+                <div className={styles.stepNumber}>2</div>
+              </div>
+              <div className={styles.stepName}>Match</div>
+              <div className={styles.stepDesc}>We instantly match you with a qualified, certified interpreter.</div>
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="6" width="13" height="12" rx="2" /><path d="M16 10.5l5-3v9.4l-5-2.4" />
+                </svg>
+                <div className={styles.stepNumber}>3</div>
+              </div>
+              <div className={styles.stepName}>Connect</div>
+              <div className={styles.stepDesc}>Start your session via video, phone, or arrange in-person service.</div>
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4.5h16v11H8.5L4 19.5v-4H4Z" />
+                </svg>
+                <div className={styles.stepNumber}>4</div>
+              </div>
+              <div className={styles.stepName}>Communicate</div>
+              <div className={styles.stepDesc}>Clear, accurate communication between your team and every patient.</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* DELIVERY MODES */}
@@ -486,7 +588,155 @@ export default function CatenaLandingPage() {
 
       {modalState === 'request' && (
         <div className={styles.modal}>
-          {/* Request Interpreter Modal goes here */}
+          <div className={styles.modalHeader}>
+            <h2 className={styles.modalTitle}>Request an Interpreter</h2>
+            <p className={styles.modalSubtitle}>Connect with a qualified Spanish medical interpreter for your patient care needs.</p>
+          </div>
+
+          <form className={styles.modalForm} onSubmit={handleRequestSubmit}>
+            {submitMessage && (
+              <div className={`${styles.submitMessage} ${styles[submitMessage.type]}`}>
+                {submitMessage.text}
+              </div>
+            )}
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Appointment Type *</label>
+              <select
+                className={styles.formInput}
+                value={requestFormData.appointmentType || ''}
+                onChange={(e) =>
+                  setRequestFormData({
+                    ...requestFormData,
+                    appointmentType: e.target.value as 'video' | 'phone' | 'scheduled',
+                  })
+                }
+                required
+              >
+                <option value="">Select appointment type</option>
+                <option value="video">Video Interpretation</option>
+                <option value="phone">Phone Interpretation</option>
+                <option value="scheduled">Scheduled Interpretation</option>
+              </select>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Date & Time *</label>
+              <input
+                className={styles.formInput}
+                type="datetime-local"
+                value={requestFormData.dateTime || ''}
+                onChange={(e) =>
+                  setRequestFormData({
+                    ...requestFormData,
+                    dateTime: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Patient Name *</label>
+              <input
+                className={styles.formInput}
+                type="text"
+                placeholder="Patient name"
+                value={requestFormData.patientName || ''}
+                onChange={(e) =>
+                  setRequestFormData({
+                    ...requestFormData,
+                    patientName: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Your Email *</label>
+              <input
+                className={styles.formInput}
+                type="email"
+                placeholder="your@email.com"
+                value={requestFormData.email || ''}
+                onChange={(e) =>
+                  setRequestFormData({
+                    ...requestFormData,
+                    email: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Phone Number *</label>
+              <input
+                className={styles.formInput}
+                type="tel"
+                placeholder="(555) 123-4567"
+                value={requestFormData.phone || ''}
+                onChange={(e) =>
+                  setRequestFormData({
+                    ...requestFormData,
+                    phone: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>Notes / Special Requests</label>
+              <textarea
+                className={styles.formTextarea}
+                placeholder="Any special requirements or notes?"
+                rows={3}
+                value={requestFormData.notes || ''}
+                onChange={(e) =>
+                  setRequestFormData({
+                    ...requestFormData,
+                    notes: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formCheckbox}>
+                <input
+                  type="checkbox"
+                  checked={requestFormData.acceptTerms || false}
+                  onChange={(e) =>
+                    setRequestFormData({
+                      ...requestFormData,
+                      acceptTerms: e.target.checked,
+                    })
+                  }
+                  required
+                />
+                I accept the terms and conditions
+              </label>
+            </div>
+
+            <div className={styles.formGroup} style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '20px' }}>
+              <button
+                type="button"
+                className={`${styles.ctaButton} ${styles.secondary}`}
+                onClick={() => setModalState(null)}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className={`${styles.ctaButton} ${styles.primary}`}
+                disabled={submitLoading}
+              >
+                {submitLoading ? 'Submitting...' : 'Request Interpreter'}
+              </button>
+            </div>
+          </form>
         </div>
       )}
 
