@@ -1,0 +1,176 @@
+/* Shared section patterns reused across the standalone marketing pages
+   (Providers, Interpreters, About, Resources). Colors/spacing intentionally
+   mirror app/page.module.css so every page reads as one design system. */
+
+/* ============ PAGE HERO ============ */
+
+.pageHero {
+  padding: 88px 64px 96px 64px;
+  text-align: center;
+  background: linear-gradient(180deg, #FAFBFD 0%, #FFFFFF 100%);
+}
+
+.pageHeroInner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.pageHeroLabel {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: #2E9E8E;
+  margin-bottom: 18px;
+}
+
+.pageHeroHeading {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 46px;
+  line-height: 1.15;
+  color: #122C4D;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pageHeroSubtext {
+  margin: 22px auto 0 auto;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #5B6472;
+  max-width: 560px;
+}
+
+.pageHeroCtas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+/* ============ NUMBERED PROCESS STEPS ============ */
+
+.processSection {
+  padding: 96px 64px;
+  background: #FFFFFF;
+}
+
+.processGrid {
+  max-width: 1200px;
+  margin: 52px auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.processCard {
+  position: relative;
+  padding: 28px 24px;
+  border: 1px solid #E8EBF1;
+  border-radius: 16px;
+  background: #FAFBFD;
+}
+
+.processNumber {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #122C4D;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.processTitle {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #122C4D;
+  margin-bottom: 8px;
+}
+
+.processDesc {
+  font-size: 13.5px;
+  color: #5B6472;
+  line-height: 1.6;
+}
+
+/* ============ CHIP GRID (facilities / requirements / values) ============ */
+
+.altSection {
+  padding: 96px 64px;
+  background: #FAFBFD;
+}
+
+.chipGrid {
+  max-width: 1000px;
+  margin: 52px auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.chipCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border: 1px solid #E8EBF1;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #33404F;
+}
+
+.chipIcon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 9px;
+  background: rgba(46, 158, 142, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============ FAQ WRAPPER ============ */
+
+.faqSection {
+  padding: 96px 64px;
+  background: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chipGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pageHero {
+    padding: 64px 32px 72px 32px;
+  }
+
+  .pageHeroHeading {
+    font-size: 32px;
+  }
+
+  .processSection,
+  .altSection,
+  .faqSection {
+    padding: 72px 32px;
+  }
+
+  .processGrid,
+  .chipGrid {
+    grid-template-columns: 1fr;
+  }
+}

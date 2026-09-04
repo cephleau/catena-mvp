@@ -1,0 +1,89 @@
+.storySection {
+  padding: 96px 64px;
+  background: #FFFFFF;
+}
+
+.storyInner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.storyText {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #5B6472;
+}
+
+.storyText + .storyText {
+  margin-top: 16px;
+}
+
+.teamNote {
+  max-width: 720px;
+  margin: 40px auto 0 auto;
+  padding: 24px 28px;
+  border: 1.5px dashed #DCE2EB;
+  border-radius: 14px;
+  background: #FAFBFD;
+  font-size: 13.5px;
+  color: #7C8794;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.splitSection {
+  padding: 96px 64px;
+  background: #FAFBFD;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.splitCard {
+  background: #FFFFFF;
+  border: 1px solid #E8EBF1;
+  border-radius: 18px;
+  padding: 36px;
+}
+
+.splitCardTitle {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #122C4D;
+  margin-bottom: 10px;
+}
+
+.splitCardText {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #5B6472;
+  margin-bottom: 20px;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #122C4D;
+}
+
+@media (max-width: 768px) {
+  .storySection {
+    padding: 72px 32px;
+  }
+
+  .splitSection {
+    padding: 72px 32px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .splitCard {
+    padding: 28px 24px;
+  }
+}
