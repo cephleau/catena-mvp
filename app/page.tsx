@@ -62,7 +62,7 @@ export default function CatenaLandingPage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/hero-illustration.jpg"
-              alt="A doctor and patient communicating across a language barrier"
+              alt="A doctor, patient, and remote medical interpreter communicating together during an appointment"
               fill
               priority
               className={styles.heroImg}
