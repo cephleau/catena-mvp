@@ -308,14 +308,15 @@
 
 .heroImage {
   position: relative;
-  height: 460px;
+  aspect-ratio: 1678 / 937;
   border-radius: 26px;
   overflow: hidden;
+  background: #FAFBFD;
   box-shadow: 0 30px 60px -25px rgba(15, 30, 55, 0.45);
 }
 
 .heroImg {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .heroImageOverlay {
@@ -347,10 +348,6 @@
 
   .heroHeading {
     font-size: 36px;
-  }
-
-  .heroImage {
-    height: 300px;
   }
 }
 
@@ -1236,10 +1233,6 @@
   .ctaButton.secondary {
     width: 100%;
     padding: 12px 20px;
-  }
-
-  .heroImage {
-    height: 280px;
   }
 
   .sectionHeading {
