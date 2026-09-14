@@ -61,8 +61,8 @@ export default function CatenaLandingPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/images/hero-illustration.jpg"
-              alt="A doctor, patient, and remote medical interpreter communicating together during an appointment"
+              src="/images/hero-main.jpg"
+              alt="Doctor, patient, and remote interpreter with headphones collaborating - representing precision in medical interpretation"
               fill
               priority
               className={styles.heroImg}
@@ -283,50 +283,21 @@ export default function CatenaLandingPage() {
       {/* COMMUNICATION CHAIN */}
       <section className={styles.communicationChain}>
         <div className={styles.communicationChainContent}>
-          <div className={styles.sectionHeader}>
+          <div className={styles.chainTextBlock}>
             <div className={styles.sectionLabel}>STRONGER OUTCOMES</div>
             <h2 className={styles.sectionHeading}>We strengthen the entire communication chain.</h2>
-            <p className={styles.sectionSubtext}>Professional interpretation isn't just about translating words—it's about preserving clinical meaning, building patient trust, and ensuring your team can deliver the best possible care.</p>
+            <p className={styles.chainDescription}>
+              Professional interpretation isn't just about translating words—it's about preserving clinical meaning, building patient trust, and ensuring your team can deliver the best possible care.
+            </p>
           </div>
 
-          <div className={styles.chainGrid}>
-            <div className={styles.chainCard}>
-              <div className={styles.chainCardTop}>
-                <div className={styles.chainIcon}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E9E8E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1"/><circle cx="10" cy="7" r="3.4"/>
-                    <path d="M22.5 20v-1a3.6 3.6 0 0 0-2.6-3.46"/><path d="M15.5 3.6a3.6 3.6 0 0 1 0 6.98"/>
-                  </svg>
-                </div>
-              </div>
-              <div className={styles.chainCardTitle}>For Providers</div>
-              <div className={styles.chainCardDesc}>Save time, reduce liability, and focus on diagnosis instead of struggling to communicate.</div>
-            </div>
-
-            <div className={styles.chainCard}>
-              <div className={styles.chainCardTop}>
-                <div className={styles.chainIcon}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E9E8E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 20H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14l4 6v8a2 2 0 0 1-2 2Z"/><path d="M12 8v8M8 12h8"/>
-                  </svg>
-                </div>
-              </div>
-              <div className={styles.chainCardTitle}>For Patients</div>
-              <div className={styles.chainCardDesc}>Feel heard, understood, and fully informed about your health decisions in your own language.</div>
-            </div>
-
-            <div className={styles.chainCard}>
-              <div className={styles.chainCardTop}>
-                <div className={styles.chainIcon}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E9E8E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3"/>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </svg>
-                </div>
-              </div>
-              <div className={styles.chainCardTitle}>For Interpreters</div>
-              <div className={styles.chainCardDesc}>Work with a team that values your expertise and supports your professional growth.</div>
-            </div>
+          <div className={styles.chainImageWrapper}>
+            <Image
+              src="/images/communication-chain.jpg"
+              alt="Doctor, patient, and remote interpreter communicating together - representing the strengthened communication chain"
+              fill
+              className={styles.chainImg}
+            />
           </div>
         </div>
       </section>
