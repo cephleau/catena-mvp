@@ -753,6 +753,27 @@
   color: #5B6472;
 }
 
+.chainTextBlock {
+  flex: 1;
+}
+
+.chainDescription {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #5B6472;
+  margin: 16px 0 0;
+}
+
+.chainImageWrapper {
+  flex: 1;
+  position: relative;
+  height: 400px;
+}
+
+.chainImg {
+  object-fit: cover;
+}
+
 .sectionSubtext {
   font-size: 16px;
   line-height: 1.7;

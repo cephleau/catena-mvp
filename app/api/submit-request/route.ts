@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const NOTION_TOKEN = process.env.NOTION_API_TOKEN;
+const NOTION_TOKEN = process.env.NOTION_API_TOKEN || process.env.NOTION_API_TOKEN2;
 if (!NOTION_TOKEN) {
-  throw new Error('NOTION_API_TOKEN environment variable is required');
+  console.warn('Neither NOTION_API_TOKEN nor NOTION_API_TOKEN2 is set');
 }
 const SERVICE_REQUEST_DB_ID = 'e2ba1028045a4994b444b372bf79e49d';
 const NOTION_API_VERSION = '2022-06-28';
