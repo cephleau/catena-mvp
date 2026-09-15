@@ -8,248 +8,331 @@ const NOTION_API_VERSION = '2022-06-28';
 const rateLimitMap = new Map<string, number[]>();
 
 interface ApplicationPayload {
+  // Personal Information
   applicantName?: string;
   email?: string;
   phone?: string;
+  countryOfResidence?: string;
+  city?: string;
+  linkedinUrl?: string;
+
+  // Language Experience
+  nativeLanguage?: string;
   languagePairs?: string;
-  yearsOfExperience?: string;
-  certifications?: string[];
-  availability?: string[];
-  deliveryModes?: string[];
-  resumeLink?: string;
+  languageProficiencyCertificate?: 'Yes' | 'No';
+  certificateDetails?: string;
+  medicalInterpreterTraining?: 'Yes' | 'No';
+  trainingDetails?: string;
+  medicalInterpretationExperience?: '<6m' | '6-12m' | '1-2y' | '2-5y' | '>5y';
+  otherRelevantFields?: string[];
+  preferredModalities?: string[];
+
+  // Availability & Technical
+  weeklyLoggedInHours?: number;
+  desiredRateUsd?: number;
+  preferredSchedule?: 'Full time' | 'Part time' | 'Freelance / Per minute';
+  technicalReadiness?: 'Yes' | 'No';
+
+  // Attestation
+  applicantAttestation?: boolean;
+
+  // System
   honeypot?: string;
 }
 
-export async function POST(request: NextRequest) {
+// HTML entity sanitization
+function sanitizeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+// Get client IP
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    request.headers.get('x-real-ip') ||
+    'unknown'
+  );
+}
+
+// Rate limiting check (5 per hour per IP)
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const oneHourAgo = now - 3600000; // 1 hour in ms
+
+  if (!rateLimitMap.has(ip)) {
+    rateLimitMap.set(ip, [now]);
+    return true;
+  }
+
+  const timestamps = rateLimitMap.get(ip)!;
+  const recentTimestamps = timestamps.filter(t => t > oneHourAgo);
+
+  if (recentTimestamps.length >= 5) {
+    return false;
+  }
+
+  recentTimestamps.push(now);
+  rateLimitMap.set(ip, recentTimestamps);
+  return true;
+}
+
+// Validation
+function validatePayload(data: ApplicationPayload): { valid: boolean; errors: string[] } {
+  const errors: string[] = [];
+
+  // Personal Information
+  if (!data.applicantName?.trim()) errors.push('fullName required');
+  if (!data.email?.trim()) errors.push('email required');
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push('email invalid');
+  if (!data.phone?.trim()) errors.push('phone required');
+  if (!data.countryOfResidence?.trim()) errors.push('countryOfResidence required');
+  if (!data.city?.trim()) errors.push('city required');
+
+  // Language Experience
+  if (!data.nativeLanguage?.trim()) errors.push('nativeLanguage required');
+  if (!data.languagePairs?.trim()) errors.push('languagePairs required');
+  if (data.languageProficiencyCertificate !== 'Yes' && data.languageProficiencyCertificate !== 'No')
+    errors.push('languageProficiencyCertificate invalid');
+  if (data.languageProficiencyCertificate === 'Yes' && !data.certificateDetails?.trim())
+    errors.push('certificateDetails required when certificate = Yes');
+  if (data.medicalInterpreterTraining !== 'Yes' && data.medicalInterpreterTraining !== 'No')
+    errors.push('medicalInterpreterTraining invalid');
+  if (data.medicalInterpreterTraining === 'Yes' && !data.trainingDetails?.trim())
+    errors.push('trainingDetails required when training = Yes');
+  if (!['<6m', '6-12m', '1-2y', '2-5y', '>5y'].includes(data.medicalInterpretationExperience || ''))
+    errors.push('medicalInterpretationExperience invalid');
+  if (!Array.isArray(data.otherRelevantFields) || data.otherRelevantFields.length === 0)
+    errors.push('otherRelevantFields required');
+  if (!Array.isArray(data.preferredModalities) || data.preferredModalities.length === 0)
+    errors.push('preferredModalities required');
+
+  // Availability & Technical
+  if (typeof data.weeklyLoggedInHours !== 'number' || data.weeklyLoggedInHours <= 0 || data.weeklyLoggedInHours > 168)
+    errors.push('weeklyLoggedInHours invalid');
+  if (typeof data.desiredRateUsd !== 'number' || data.desiredRateUsd <= 0 || data.desiredRateUsd > 999.99)
+    errors.push('desiredRateUsd invalid');
+  if (!['Full time', 'Part time', 'Freelance / Per minute'].includes(data.preferredSchedule || ''))
+    errors.push('preferredSchedule invalid');
+  if (data.technicalReadiness !== 'Yes' && data.technicalReadiness !== 'No')
+    errors.push('technicalReadiness invalid');
+
+  // Attestation
+  if (data.applicantAttestation !== true) errors.push('applicantAttestation required');
+
+  return { valid: errors.length === 0, errors };
+}
+
+// Write to Notion
+async function writeToNotion(data: ApplicationPayload): Promise<boolean> {
+  if (!NOTION_TOKEN || !INTERPRETER_APPLICATIONS_DB_ID) {
+    console.error('Missing Notion credentials');
+    return false;
+  }
+
   try {
-    if (!NOTION_TOKEN || !INTERPRETER_APPLICATIONS_DB_ID) {
-      console.error('Notion credentials not configured');
-      return NextResponse.json(
-        { error: 'Server is not configured to accept applications yet. Please try again later.' },
-        { status: 500 }
-      );
-    }
-
-    const body: ApplicationPayload = await request.json();
-    const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
-
-    // Rate limiting: 5 submissions per IP per hour
-    const now = Date.now();
-    const oneHourAgo = now - 3600000;
-    const ipSubmissions = rateLimitMap.get(clientIP) || [];
-    const recentSubmissions = ipSubmissions.filter(ts => ts > oneHourAgo);
-
-    if (recentSubmissions.length >= 5) {
-      console.warn(`Rate limit exceeded for IP ${clientIP}`);
-      return NextResponse.json(
-        { error: 'Too many submissions. Please try again later.' },
-        { status: 429 }
-      );
-    }
-
-    recentSubmissions.push(now);
-    rateLimitMap.set(clientIP, recentSubmissions);
-
-    // Honeypot check (must be empty)
-    if (body.honeypot && body.honeypot.trim() !== '') {
-      console.warn(`Honeypot triggered for IP ${clientIP}`);
-      // Silently reject (pretend it succeeded to confuse bots)
-      return NextResponse.json(
-        { success: true, message: 'Application submitted successfully. We\'ll review it and be in touch.' },
-        { status: 201 }
-      );
-    }
-
-    // Validate required fields
-    const { applicantName, email, languagePairs } = body;
-    if (!applicantName || !email || !languagePairs) {
-      return NextResponse.json(
-        { error: 'Missing required fields: name, email, and language pairs' },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
-    }
-
-    // Validate optional URL format if provided
-    if (body.resumeLink && body.resumeLink.trim()) {
-      try {
-        new URL(body.resumeLink);
-      } catch {
-        return NextResponse.json(
-          { error: 'Invalid resume link URL' },
-          { status: 400 }
-        );
-      }
-    }
-
-    // Validate string lengths (prevent XSS/injection)
-    if (applicantName.length > 200) {
-      return NextResponse.json(
-        { error: 'Name is too long (max 200 characters)' },
-        { status: 400 }
-      );
-    }
-
-    if (email.length > 255) {
-      return NextResponse.json(
-        { error: 'Email is too long (max 255 characters)' },
-        { status: 400 }
-      );
-    }
-
-    if (languagePairs.length > 500) {
-      return NextResponse.json(
-        { error: 'Language pairs description is too long (max 500 characters)' },
-        { status: 400 }
-      );
-    }
-
-    // Sanitize inputs (escape HTML entities)
-    const sanitize = (text: string): string => {
-      return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;');
-    };
-
-    const sanitizedName = sanitize(applicantName);
-    const sanitizedLanguagePairs = sanitize(languagePairs);
-
-    // Build Notion payload
-    const notionPayload: Record<string, unknown> = {
+    const notionPayload = {
       parent: { database_id: INTERPRETER_APPLICATIONS_DB_ID },
       properties: {
         'Applicant Name': {
-          title: [{ text: { content: sanitizedName } }],
+          title: [
+            {
+              text: {
+                content: sanitizeHtml(data.applicantName || '').substring(0, 200),
+              },
+            },
+          ],
         },
-        'Email': {
-          email: email,
+        Email: {
+          email: data.email || '',
+        },
+        Phone: {
+          phone_number: data.phone || '',
+        },
+        'Country of Residence': {
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.countryOfResidence || '').substring(0, 100),
+              },
+            },
+          ],
+        },
+        City: {
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.city || '').substring(0, 100),
+              },
+            },
+          ],
+        },
+        'LinkedIn URL': {
+          url: data.linkedinUrl || null,
+        },
+        'Native Language': {
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.nativeLanguage || '').substring(0, 100),
+              },
+            },
+          ],
         },
         'Language Pairs': {
-          rich_text: [{ text: { content: sanitizedLanguagePairs } }],
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.languagePairs || '').substring(0, 500),
+              },
+            },
+          ],
         },
-        'Status': {
-          select: { name: 'New' },
+        'Language Proficiency Certificate': {
+          select: {
+            name: data.languageProficiencyCertificate || 'No',
+          },
         },
-        'Applied Date': {
-          date: { start: new Date().toISOString().split('T')[0] },
+        'Certificate Details': {
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.certificateDetails || '').substring(0, 500),
+              },
+            },
+          ],
+        },
+        'Medical Interpreter Training': {
+          select: {
+            name: data.medicalInterpreterTraining || 'No',
+          },
+        },
+        'Training Details': {
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.trainingDetails || '').substring(0, 500),
+              },
+            },
+          ],
+        },
+        'Medical Interpretation Experience': {
+          select: {
+            name: {
+              '<6m': 'Less than 6 months',
+              '6-12m': '6–12 months',
+              '1-2y': '1–2 years',
+              '2-5y': '2–5 years',
+              '>5y': 'More than 5 years',
+            }[data.medicalInterpretationExperience || ''] || 'Unknown',
+          },
+        },
+        'Other Relevant Fields': {
+          multi_select: (data.otherRelevantFields || []).map(field => ({ name: field })),
+        },
+        'Preferred Modalities': {
+          multi_select: (data.preferredModalities || []).map(modality => ({ name: modality })),
+        },
+        'Weekly Logged-In Hours': {
+          number: data.weeklyLoggedInHours || 0,
+        },
+        'Desired Rate USD': {
+          number: data.desiredRateUsd || 0,
+        },
+        'Preferred Schedule': {
+          select: {
+            name: data.preferredSchedule || 'Full time',
+          },
+        },
+        'Technical Readiness': {
+          select: {
+            name: data.technicalReadiness || 'No',
+          },
+        },
+        Status: {
+          select: {
+            name: 'New',
+          },
         },
       },
     };
 
-    const properties = notionPayload.properties as Record<string, unknown>;
-
-    // Add optional fields
-    if (body.phone && body.phone.trim()) {
-      properties['Phone'] = {
-        phone_number: body.phone,
-      };
-    }
-
-    if (body.yearsOfExperience && body.yearsOfExperience.trim()) {
-      properties['Years of Experience'] = {
-        rich_text: [{ text: { content: body.yearsOfExperience } }],
-      };
-    }
-
-    if (body.certifications && body.certifications.length > 0) {
-      properties['Certifications'] = {
-        multi_select: body.certifications.map((cert) => ({ name: cert })),
-      };
-    }
-
-    if (body.availability && body.availability.length > 0) {
-      properties['Availability'] = {
-        multi_select: body.availability.map((avail) => ({ name: avail })),
-      };
-    }
-
-    if (body.deliveryModes && body.deliveryModes.length > 0) {
-      properties['Delivery Modes'] = {
-        multi_select: body.deliveryModes.map((mode) => ({ name: mode })),
-      };
-    }
-
-    if (body.resumeLink && body.resumeLink.trim()) {
-      properties['Resume/Portfolio Link'] = {
-        url: body.resumeLink,
-      };
-    }
-
-    // Submit to Notion
-    const notionResponse = await fetch('https://api.notion.com/v1/pages', {
+    const response = await fetch('https://api.notion.com/v1/pages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${NOTION_TOKEN}`,
+        Authorization: `Bearer ${NOTION_TOKEN}`,
         'Notion-Version': NOTION_API_VERSION,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(notionPayload),
     });
 
-    if (!notionResponse.ok) {
-      const error = await notionResponse.json().catch(() => ({}));
-      console.error(`Notion API error: ${notionResponse.status}`, {
-        code: (error as Record<string, unknown>).code,
-        message: (error as Record<string, unknown>).message,
-      });
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('Notion API error:', error);
+      return false;
+    }
 
-      // Map specific Notion errors to user-friendly messages
-      if (notionResponse.status === 401) {
-        return NextResponse.json(
-          { error: 'Server is not configured correctly. Please try again later.' },
-          { status: 500 }
-        );
-      }
+    return true;
+  } catch (error) {
+    console.error('Notion write error:', error);
+    return false;
+  }
+}
 
-      if (notionResponse.status === 429) {
-        return NextResponse.json(
-          { error: 'Server is temporarily busy. Please try again in a few moments.' },
-          { status: 429 }
-        );
-      }
+export async function POST(request: NextRequest) {
+  try {
+    const data: ApplicationPayload = await request.json();
 
-      if (notionResponse.status === 400) {
-        // Property name or type mismatch
-        return NextResponse.json(
-          { error: 'Server configuration error. Please contact support.' },
-          { status: 500 }
-        );
-      }
-
+    // Honeypot check (silent success)
+    if (data.honeypot && data.honeypot.trim().length > 0) {
       return NextResponse.json(
-        { error: 'Failed to submit application. Please try again later.' },
+        { success: true, message: 'Application submitted successfully' },
+        { status: 201 }
+      );
+    }
+
+    // Rate limit check
+    const clientIp = getClientIp(request);
+    if (!checkRateLimit(clientIp)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    // Validate payload
+    const validation = validatePayload(data);
+    if (!validation.valid) {
+      console.error('Validation errors:', validation.errors);
+      return NextResponse.json(
+        { error: 'Submission data is invalid. Please check your inputs and try again.' },
+        { status: 400 }
+      );
+    }
+
+    // Write to Notion
+    const notionSuccess = await writeToNotion(data);
+    if (!notionSuccess) {
+      return NextResponse.json(
+        { error: 'Application submission failed. Please try again later.' },
         { status: 500 }
       );
     }
 
-    const notionEntry = await notionResponse.json();
-    console.log(`Application submitted successfully (ID: ${(notionEntry as Record<string, unknown>).id})`);
-
+    // Success
     return NextResponse.json(
-      {
-        success: true,
-        message: 'Application submitted successfully. We\'ll review it and be in touch.',
-      },
+      { success: true, message: 'Application submitted successfully' },
       { status: 201 }
     );
   } catch (error) {
-    console.error('API error:', {
-      type: error instanceof Error ? error.constructor.name : typeof error,
-      message: error instanceof Error ? error.message : String(error),
-    });
+    console.error('Request processing error:', error);
     return NextResponse.json(
-      { error: 'An error occurred. Please try again.' },
+      { error: 'An error occurred processing your request. Please try again.' },
       { status: 500 }
     );
   }
