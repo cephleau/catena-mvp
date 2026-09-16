@@ -7,6 +7,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import RequestInterpreterButton from '../components/RequestInterpreterButton';
 import ScheduleDemoButton from '../components/ScheduleDemoButton';
+import PdfCarousel from '../components/PdfCarousel';
 
 export const metadata: Metadata = {
   title: 'About - Catena Language Partners',
@@ -82,6 +83,21 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CATENA POST REEL */}
+      <section style={{ paddingBottom: '60px' }}>
+        <div className={styles.centerSection}>
+          <div className={styles.sectionHeader}>
+            <div className={styles.sectionLabel}>OUR WORK</div>
+            <h2 className={styles.sectionHeading}>Catena in action.</h2>
+          </div>
+          <PdfCarousel
+            pdfUrl="/documents/catena-post-reel.pdf"
+            title="Catena Post Reel"
+            totalPages={10}
+          />
         </div>
       </section>
 
