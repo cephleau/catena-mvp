@@ -56,6 +56,16 @@ function getClientIp(request: NextRequest): string {
   );
 }
 
+// Map appointment type to Notion Modality select value
+function mapModalityValue(appointmentType?: string): string {
+  const modalityMap: Record<string, string> = {
+    'video': 'Video',
+    'phone': 'Phone',
+    'in-person': 'In-person',
+  };
+  return modalityMap[appointmentType || 'video'] || 'Video';
+}
+
 // Write to Supabase
 async function writeToSupabase(data: ServiceRequestPayload, clientIp: string): Promise<{ success: boolean; id?: number; error?: string }> {
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
@@ -103,117 +113,94 @@ async function writeToSupabase(data: ServiceRequestPayload, clientIp: string): P
   }
 }
 
-// Write to Notion
+// Write to Notion using canonical schema
 async function writeToNotion(data: ServiceRequestPayload, supabaseId?: number): Promise<{ success: boolean; notionPageId?: string; error?: string }> {
   if (!NOTION_TOKEN) {
     return { success: false, error: 'Notion not configured' };
   }
 
   try {
+    // Build the request name/title from provider and patient info
+    const requestName = `${data.patientName || 'Patient'} - ${data.providerName || 'Provider'}`;
+
+    // Build Notion payload with CANONICAL SCHEMA
     const notionPayload: any = {
       parent: { database_id: SERVICE_REQUEST_DB_ID },
       properties: {
-        'Request ID': {
+        // REQUIRED: Title field
+        'Name': {
           title: [
             {
               text: {
-                content: supabaseId ? `SR-${supabaseId}` : `SR-${Date.now()}`,
+                content: sanitizeHtml(requestName).substring(0, 255),
               },
             },
           ],
         },
-        'Service Type': {
-          select: {
-            name: data.appointmentType || 'video',
-          },
-        },
-        'Requested Time': {
+
+        // Requested Start (DATE) - REQUIRED for workflow
+        'Requested Start': {
           date: {
             start: data.appointmentDate || new Date().toISOString(),
           },
         },
-        'Status': {
-          select: {
-            name: 'Unassigned',
+
+        // Workflow Status (STATUS) - MUST be 'New' for new submissions
+        'Workflow Status': {
+          status: {
+            name: 'New',
           },
         },
+
+        // Expected Duration (NUMBER)
+        'Expected Duration (min)': {
+          number: data.appointmentDurationMinutes || null,
+        },
+
+        // Service Type (SELECT) - if provided
+        ...(data.serviceSpecialty && {
+          'Service Type': {
+            select: {
+              name: sanitizeHtml(data.serviceSpecialty).substring(0, 100),
+            },
+          },
+        }),
+
+        // Modality (SELECT) - map appointment type to modality
+        'Modality': {
+          select: {
+            name: mapModalityValue(data.appointmentType),
+          },
+        },
+
+        // Language (RICH TEXT) - patient primary language
+        'Language': {
+          rich_text: [
+            {
+              text: {
+                content: sanitizeHtml(data.patientPrimaryLanguage || 'Spanish').substring(0, 255),
+              },
+            },
+          ],
+        },
+
+        // Connection / Location (RICH TEXT) - optional provider organization
+        ...(data.providerOrganization && {
+          'Connection / Location': {
+            rich_text: [
+              {
+                text: {
+                  content: sanitizeHtml(data.providerOrganization).substring(0, 500),
+                },
+              },
+            ],
+          },
+        }),
       },
     };
 
-    // Add provider info
-    if (data.providerName) {
-      notionPayload.properties['Provider Name'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.providerName).substring(0, 255) } }],
-      };
-    }
-
-    if (data.providerOrganization) {
-      notionPayload.properties['Provider Organization'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.providerOrganization).substring(0, 255) } }],
-      };
-    }
-
-    if (data.providerEmail) {
-      notionPayload.properties['Provider Email'] = {
-        email: data.providerEmail,
-      };
-    }
-
-    if (data.providerPhone) {
-      notionPayload.properties['Provider Phone'] = {
-        phone_number: data.providerPhone,
-      };
-    }
-
-    // Add patient info
-    if (data.patientName) {
-      notionPayload.properties['Patient Name'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.patientName).substring(0, 255) } }],
-      };
-    }
-
-    if (data.patientAge) {
-      notionPayload.properties['Patient Age'] = {
-        number: data.patientAge,
-      };
-    }
-
-    if (data.patientGender) {
-      notionPayload.properties['Patient Gender'] = {
-        select: { name: data.patientGender },
-      };
-    }
-
-    if (data.patientPrimaryLanguage) {
-      notionPayload.properties['Patient Primary Language'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.patientPrimaryLanguage).substring(0, 100) } }],
-      };
-    }
-
-    // Add service details
-    if (data.serviceSpecialty) {
-      notionPayload.properties['Service Specialty'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.serviceSpecialty).substring(0, 255) } }],
-      };
-    }
-
-    if (data.notes) {
-      notionPayload.properties['Notes'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.notes).substring(0, 1000) } }],
-      };
-    }
-
-    if (data.specialRequests) {
-      notionPayload.properties['Special Requests'] = {
-        rich_text: [{ text: { content: sanitizeHtml(data.specialRequests).substring(0, 1000) } }],
-      };
-    }
-
-    if (data.hipaaAttestation !== undefined) {
-      notionPayload.properties['HIPAA Attestation'] = {
-        checkbox: data.hipaaAttestation,
-      };
-    }
+    // Never send internal fields, empty values, or relation values without page IDs
+    // Skip: Scheduler, Actual Start, Actual End, Client, Interpreter, etc.
 
     const notionResponse = await fetch('https://api.notion.com/v1/pages', {
       method: 'POST',
@@ -244,6 +231,20 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const data: ServiceRequestPayload = body.data || {};
     const clientIp = getClientIp(request);
+
+    // Validate required fields
+    const requiredFields = ['patientName', 'appointmentDate', 'hipaaAttestation'];
+    const missingFields = requiredFields.filter(field => {
+      const value = data[field as keyof ServiceRequestPayload];
+      return value === undefined || value === null || value === '' || (typeof value === 'boolean' && !value);
+    });
+
+    if (missingFields.length > 0) {
+      return NextResponse.json(
+        { error: `Missing required fields: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
+    }
 
     // Write to Supabase first (source of truth)
     const supabaseResult = await writeToSupabase(data, clientIp);
