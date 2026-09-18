@@ -29,7 +29,7 @@ interface ApplicationForm {
 
   // Availability & Technical
   weeklyLoggedInHours: number;
-  desiredRateUsd: number;
+  desiredRateUsd: string | number; // Allow string for empty state
   preferredSchedule: 'Full time' | 'Part time' | 'Freelance / Per minute';
   technicalReadiness: 'Yes' | 'No';
 
@@ -51,6 +51,8 @@ const EXPERIENCE_OPTIONS = [
 const OTHER_FIELDS_OPTIONS = [
   'Legal', 'Insurance', 'Financial', 'Education', 'Government', 'Customer Service'
 ];
+
+const NA_OPTION = 'N/A — No other industry experience';
 
 const MODALITIES_OPTIONS = [
   'OPI', 'VRI', 'Simultaneous Interpreting', 'Conference Interpreting', 'In-person Interpreting'
@@ -78,7 +80,7 @@ export default function InterpreterApplyPage() {
     otherRelevantFields: [],
     preferredModalities: [],
     weeklyLoggedInHours: undefined,
-    desiredRateUsd: undefined,
+    desiredRateUsd: '' as any,
     preferredSchedule: 'Full time',
     technicalReadiness: 'No',
     applicantAttestation: false,
@@ -112,9 +114,10 @@ export default function InterpreterApplyPage() {
     if (formData.weeklyLoggedInHours && formData.weeklyLoggedInHours > 168)
       newErrors.weeklyLoggedInHours = 'Max 168 hours per week';
     
-    if (formData.desiredRateUsd === undefined || formData.desiredRateUsd <= 0)
+    const desiredRateValue = formData.desiredRateUsd ? parseFloat(String(formData.desiredRateUsd)) : NaN;
+    if (!formData.desiredRateUsd || isNaN(desiredRateValue) || desiredRateValue <= 0)
       newErrors.desiredRateUsd = 'Positive rate required';
-    if (formData.desiredRateUsd && formData.desiredRateUsd > 999.99)
+    if (desiredRateValue > 999.99)
       newErrors.desiredRateUsd = 'Max $999.99 per hour';
     
     if (!formData.preferredSchedule) newErrors.preferredSchedule = 'Schedule is required';
@@ -136,10 +139,31 @@ export default function InterpreterApplyPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Toggle multi-select
+  // Toggle multi-select with mutual exclusion for N/A
   const toggleOption = (field: 'otherRelevantFields' | 'preferredModalities', value: string) => {
     setFormData(prev => {
       const current = prev[field] || [];
+      
+      // Handle N/A mutual exclusion in otherRelevantFields
+      if (field === 'otherRelevantFields') {
+        if (value === NA_OPTION) {
+          // Selecting N/A clears all other fields
+          return {
+            ...prev,
+            [field]: current.includes(value) ? [] : [NA_OPTION]
+          };
+        } else {
+          // Selecting an industry field clears N/A
+          const withoutNA = current.filter(v => v !== NA_OPTION);
+          const newList = withoutNA.includes(value) ? withoutNA.filter(v => v !== value) : [...withoutNA, value];
+          return {
+            ...prev,
+            [field]: newList
+          };
+        }
+      }
+      
+      // No mutual exclusion for modalities
       return {
         ...prev,
         [field]: current.includes(value) ? current.filter(v => v !== value) : [...current, value]
@@ -214,7 +238,7 @@ export default function InterpreterApplyPage() {
           otherRelevantFields: [],
           preferredModalities: [],
           weeklyLoggedInHours: undefined,
-          desiredRateUsd: undefined,
+          desiredRateUsd: '' as any,
           preferredSchedule: 'Full time',
           technicalReadiness: 'No',
           applicantAttestation: false,
@@ -517,6 +541,14 @@ export default function InterpreterApplyPage() {
                       {option}
                     </label>
                   ))}
+                  <label key={NA_OPTION} className={applyStyles.checkboxLabel}>
+                    <input
+                      type="checkbox"
+                      checked={(formData.otherRelevantFields || []).includes(NA_OPTION)}
+                      onChange={() => toggleOption('otherRelevantFields', NA_OPTION)}
+                    />
+                    {NA_OPTION}
+                  </label>
                 </div>
                 {errors.otherRelevantFields && <span className={applyStyles.error}>{errors.otherRelevantFields}</span>}
               </div>
@@ -564,12 +596,12 @@ export default function InterpreterApplyPage() {
                   <label className={applyStyles.formLabel}>Desired rate (USD per hour) <span className={applyStyles.required}>*</span></label>
                   <input
                     type="number"
-                    placeholder="35.00"
-                    min="0.01"
-                    max="999.99"
+                    name="desiredRate"
+                    placeholder="0.00"
+                    min="0"
                     step="0.01"
-                    value={formData.desiredRateUsd || ''}
-                    onChange={(e) => setFormData({ ...formData, desiredRateUsd: e.target.value ? parseFloat(e.target.value) : undefined })}
+                    value={formData.desiredRateUsd}
+                    onChange={(e) => setFormData({ ...formData, desiredRateUsd: e.target.value })}
                     className={applyStyles.formInput}
                   />
                   {errors.desiredRateUsd && <span className={applyStyles.error}>{errors.desiredRateUsd}</span>}
