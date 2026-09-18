@@ -10,6 +10,12 @@ interface RequestInterpreterForm {
   providerEmail: string;
   providerPhone: string;
 
+  // Patient Information
+  patientName: string;
+  patientAge?: number | string;
+  patientGender?: string;
+  patientPrimaryLanguage?: string;
+
   // Appointment Details
   appointmentType: 'video' | 'phone' | 'in-person';
   appointmentDate: string;
