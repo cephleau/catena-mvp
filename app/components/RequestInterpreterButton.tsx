@@ -15,12 +15,6 @@ interface RequestInterpreterForm {
   appointmentDate: string;
   appointmentDurationMinutes: number;
 
-  // Patient Information
-  patientName: string;
-  patientAge: number;
-  patientGender: string;
-  patientPrimaryLanguage: string;
-
   // Service Details
   serviceSpecialty: string;
   notes: string;
@@ -40,8 +34,6 @@ export default function RequestInterpreterButton({ className, children }: Reques
   const [formData, setFormData] = useState<Partial<RequestInterpreterForm>>({
     appointmentType: 'video',
     appointmentDurationMinutes: 60,
-    patientGender: 'Not specified',
-    patientPrimaryLanguage: 'Spanish',
     hipaaAttestation: false,
   });
   const [loading, setLoading] = useState(false);

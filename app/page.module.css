@@ -697,8 +697,11 @@
 }
 
 .communicationChainContent {
-  max-width: 1440px;
+  max-width: 900px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
 .chainGrid {
@@ -754,7 +757,9 @@
 }
 
 .chainTextBlock {
-  flex: 1;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .chainDescription {
@@ -765,14 +770,18 @@
 }
 
 .chainImageWrapper {
-  flex: 1;
+  width: 100%;
   position: relative;
-  height: 600px;
-  min-height: 500px;
+  height: auto;
+  min-height: auto;
+  max-width: 550px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 4;
 }
 
 .chainImg {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 }
 
 .sectionSubtext {
