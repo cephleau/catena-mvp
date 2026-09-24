@@ -309,8 +309,9 @@ export async function POST(request: NextRequest) {
     const validation = validatePayload(data);
     if (!validation.valid) {
       console.error('Validation errors:', validation.errors);
+      console.error('Request data:', JSON.stringify(data, null, 2));
       return NextResponse.json(
-        { error: 'Submission data is invalid. Please check your inputs and try again.' },
+        { error: 'Submission data is invalid. Please check your inputs and try again.', details: validation.errors },
         { status: 400 }
       );
     }
