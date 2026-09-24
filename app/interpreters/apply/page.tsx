@@ -205,7 +205,7 @@ export default function InterpreterApplyPage() {
           
           // Availability
           weeklyLoggedInHours: formData.weeklyLoggedInHours,
-          desiredRateUsd: formData.desiredRateUsd,
+          desiredRateUsd: formData.desiredRateUsd ? parseFloat(String(formData.desiredRateUsd)) : 0,
           preferredSchedule: formData.preferredSchedule,
           technicalReadiness: formData.technicalReadiness,
           
