@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const NOTION_TOKEN = process.env.NOTION_API_TOKEN;
+const NOTION_TOKEN = process.env.NOTION_API_TOKEN || process.env.NOTION_API_TOKEN2;
 // TODO(Octo/Carlos): set this once the "Interpreter Applications" Notion
 // database exists — see the property names this route writes to below.
 const INTERPRETER_APPLICATIONS_DB_ID = process.env.NOTION_INTERPRETER_APPLICATIONS_DB_ID;
